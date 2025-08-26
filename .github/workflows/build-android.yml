@@ -1,4 +1,4 @@
-name: Build Android APK
+name: 🚀 Build PayTrack Android APK
 
 on:
   push:
@@ -9,53 +9,100 @@ on:
 
 jobs:
   build:
+    name: 📱 Build Android APK
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
 
-    - name: Setup Java
+    - name: ☕ Setup Java 17
       uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
         java-version: '17'
 
-    - name: Setup Flutter
+    - name: 🐦 Setup Flutter
       uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.32.8'
         channel: 'stable'
+        cache: true
 
-    - name: Install dependencies
+    - name: 📦 Get Flutter Dependencies
       run: flutter pub get
 
-    - name: Build APK (Debug)
-      run: flutter build apk --debug
+    - name: 🔍 Analyze Code
+      run: flutter analyze --no-fatal-infos
 
-    - name: Build APK (Release)
-      run: flutter build apk --release
+    - name: 🧪 Run Tests
+      run: flutter test
 
-    - name: Upload Debug APK
+    - name: 🔨 Build Debug APK
+      run: flutter build apk --debug --verbose
+
+    - name: 🚀 Build Release APK
+      run: flutter build apk --release --verbose
+
+    - name: 📱 Build App Bundle (AAB)
+      run: flutter build appbundle --release --verbose
+
+    - name: 📤 Upload Debug APK
       uses: actions/upload-artifact@v4
       with:
         name: paytrack-debug-apk
         path: build/app/outputs/flutter-apk/app-debug.apk
+        retention-days: 30
 
-    - name: Upload Release APK
+    - name: 📤 Upload Release APK
       uses: actions/upload-artifact@v4
       with:
         name: paytrack-release-apk
         path: build/app/outputs/flutter-apk/app-release.apk
+        retention-days: 30
 
-    - name: Create Release
+    - name: 📤 Upload Release AAB
+      uses: actions/upload-artifact@v4
+      with:
+        name: paytrack-release-aab
+        path: build/app/outputs/bundle/release/app-release.aab
+        retention-days: 30
+
+    - name: 🏷️ Create Release
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
       uses: softprops/action-gh-release@v1
       with:
         tag_name: v1.0.${{ github.run_number }}
-        name: PayTrack v1.0.${{ github.run_number }}
+        name: 📱 PayTrack v1.0.${{ github.run_number }}
+        body: |
+          🎉 **PayTrack Android Release**
+          
+          ### 📱 What's New
+          - ✅ Firebase Authentication (Google + Email/Password)
+          - ✅ Real-time Payment Tracking
+          - ✅ Calendar Integration  
+          - ✅ Push Notifications
+          - ✅ Profile Management
+          - ✅ Daily Spending Tracker
+          - ✅ Material 3 Design
+          
+          ### 📥 Downloads
+          - **APK (Debug)**: For testing and development
+          - **APK (Release)**: For production use
+          - **AAB (Release)**: For Google Play Store upload
+          
+          ### 🌐 Web Version
+          Try PayTrack online: https://payment-reminder-app-3129c.web.app
+          
+          ---
+          **Build Date**: ${{ github.event.head_commit.timestamp }}
+          **Commit**: ${{ github.sha }}
         files: |
           build/app/outputs/flutter-apk/app-debug.apk
           build/app/outputs/flutter-apk/app-release.apk
-        generate_release_notes: true
+          build/app/outputs/bundle/release/app-release.aab
+        generate_release_notes: false
+        draft: false
+        prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
