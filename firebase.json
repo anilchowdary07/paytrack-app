@@ -1,0 +1,36 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "payment-reminder-app-3129c",
+          "appId": "1:985067771215:android:40e3fe3dfdfa7602c5e13a",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "payment-reminder-app-3129c",
+          "configurations": {
+            "android": "1:985067771215:android:40e3fe3dfdfa7602c5e13a",
+            "web": "1:985067771215:web:44eb90baa5e56fb7c5e13a"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
