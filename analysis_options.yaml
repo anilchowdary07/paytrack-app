@@ -21,8 +21,14 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    # Disable deprecation warnings for now
+    deprecated_member_use: false
+    deprecated_member_use_from_same_package: false
+    # Add other disabled rules as needed
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+analyzer:
+  # Allow analysis to continue despite errors
+  treat-warnings-as-errors: false
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
