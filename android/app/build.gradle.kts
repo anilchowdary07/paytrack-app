@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
-    // START: FlutterFire Configuration
+    //dependencies {
+    implementation("androidx.multidex:multidex:2.0.1")
+}ART: FlutterFire Configuration
     id("com.google.gms.google-services")
     // END: FlutterFire Configuration
     id("kotlin-android")
@@ -10,7 +12,7 @@ plugins {
 
 android {
     namespace = "com.example.payment_reminder_app"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -27,8 +29,8 @@ android {
         applicationId = "com.example.payment_reminder_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdk = 21
+        targetSdk = 34
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
@@ -48,25 +50,8 @@ android {
     }
 }
 
-configurations.all {
-    resolutionStrategy.eachDependency {
-        if (requested.group == "androidx.core" && requested.name == "core") {
-            useVersion("1.12.0")
-        }
-        if (requested.group == "androidx.lifecycle" && requested.name.startsWith("lifecycle")) {
-            useVersion("2.7.0")
-        }
-        if (requested.group == "androidx.activity" && requested.name == "activity") {
-            useVersion("1.8.2")
-        }
-        if (requested.group == "androidx.fragment" && requested.name == "fragment") {
-            useVersion("1.6.2")
-        }
-    }
-}
-
 dependencies {
-    implementation("androidx.multidex:multidex:2.0.1")
+    implementation("androidx.multidex:multidx:2.0.1")
 }
 
 flutter {
