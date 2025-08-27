@@ -1,8 +1,6 @@
 plugins {
     id("com.android.application")
-    //dependencies {
-    implementation("androidx.multidex:multidex:2.0.1")
-}ART: FlutterFire Configuration
+    // START: FlutterFire Configuration
     id("com.google.gms.google-services")
     // END: FlutterFire Configuration
     id("kotlin-android")
@@ -51,7 +49,7 @@ android {
 }
 
 dependencies {
-    implementation("androidx.multidex:multidx:2.0.1")
+    implementation("androidx.multidex:multidex:2.0.1")
 }
 
 flutter {
