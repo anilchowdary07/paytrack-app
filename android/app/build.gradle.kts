@@ -48,6 +48,15 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("androidx.core:core:1.10.1")
+        force("androidx.lifecycle:lifecycle-runtime:2.6.2")
+        force("androidx.activity:activity:1.7.2")
+        force("androidx.fragment:fragment:1.6.1")
+    }
+}
+
 dependencies {
     implementation("androidx.multidex:multidex:2.0.1")
 }
