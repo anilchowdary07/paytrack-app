@@ -8,8 +8,6 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-import org.gradle.api.artifacts.DependencyResolveDetails
-
 android {
     namespace = "com.example.payment_reminder_app"
     compileSdk = flutter.compileSdkVersion
@@ -51,18 +49,18 @@ android {
 }
 
 configurations.all {
-    resolutionStrategy.eachDependency { details: DependencyResolveDetails ->
-        if (details.requested.group == "androidx.core" && details.requested.name == "core") {
-            details.useVersion("1.12.0")
+    resolutionStrategy.eachDependency {
+        if (requested.group == "androidx.core" && requested.name == "core") {
+            useVersion("1.12.0")
         }
-        if (details.requested.group == "androidx.lifecycle" && details.requested.name.startsWith("lifecycle")) {
-            details.useVersion("2.7.0")
+        if (requested.group == "androidx.lifecycle" && requested.name.startsWith("lifecycle")) {
+            useVersion("2.7.0")
         }
-        if (details.requested.group == "androidx.activity" && details.requested.name == "activity") {
-            details.useVersion("1.8.2")
+        if (requested.group == "androidx.activity" && requested.name == "activity") {
+            useVersion("1.8.2")
         }
-        if (details.requested.group == "androidx.fragment" && details.requested.name == "fragment") {
-            details.useVersion("1.6.2")
+        if (requested.group == "androidx.fragment" && requested.name == "fragment") {
+            useVersion("1.6.2")
         }
     }
 }
