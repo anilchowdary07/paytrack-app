@@ -270,7 +270,7 @@ class _StatsScreenState extends State<StatsScreen> {
                         totalAmount,
                       ),
                     )
-                    .toList(),
+                    ,
               ],
             ),
           ),

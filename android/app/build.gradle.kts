@@ -41,25 +41,31 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    packagingOptions {
+        pickFirst("**/libc++_shared.so")
+        pickFirst("**/libjsc.so")
+    }
 }
 
 configurations.all {
-    resolutionStrategy {
-        force("androidx.core:core:1.12.0")
-        force("androidx.lifecycle:lifecycle-runtime:2.7.0")
-        force("androidx.lifecycle:lifecycle-viewmodel:2.7.0")
-        force("androidx.activity:activity:1.8.2")
-        force("androidx.fragment:fragment:1.6.2")
-        force("androidx.multidex:multidex:2.0.1")
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == "androidx.core" && details.requested.name == "core") {
+            details.useVersion("1.12.0")
+        }
+        if (details.requested.group == "androidx.lifecycle" && details.requested.name.startsWith("lifecycle")) {
+            details.useVersion("2.7.0")
+        }
+        if (details.requested.group == "androidx.activity" && details.requested.name == "activity") {
+            details.useVersion("1.8.2")
+        }
+        if (details.requested.group == "androidx.fragment" && details.requested.name == "fragment") {
+            details.useVersion("1.6.2")
+        }
     }
 }
 
 dependencies {
-    implementation("androidx.core:core:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel:2.7.0")
-    implementation("androidx.activity:activity:1.8.2")
-    implementation("androidx.fragment:fragment:1.6.2")
     implementation("androidx.multidex:multidex:2.0.1")
 }
 

@@ -444,7 +444,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                               ),
-                              icon: Container(
+                              icon: SizedBox(
                                 width: 24,
                                 height: 24,
                                 child: Lottie.asset(

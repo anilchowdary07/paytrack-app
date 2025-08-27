@@ -3,6 +3,10 @@ allprojects {
         google()
         mavenCentral()
     }
+} repositories {
+        google()
+        mavenCentral()
+    }
     
     configurations.all {
         resolutionStrategy {

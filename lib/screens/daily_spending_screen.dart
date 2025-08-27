@@ -783,7 +783,7 @@ class _DailySpendingScreenState extends State<DailySpendingScreen> {
                       ],
                     ),
                   );
-                }).toList(),
+                }),
                 if (sortedCategories.length > 3)
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
