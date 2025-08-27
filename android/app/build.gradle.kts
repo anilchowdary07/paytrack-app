@@ -8,6 +8,8 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+import org.gradle.api.artifacts.DependencyResolveDetails
+
 android {
     namespace = "com.example.payment_reminder_app"
     compileSdk = flutter.compileSdkVersion
@@ -43,13 +45,13 @@ android {
     }
 
     packagingOptions {
-        pickFirst("**/libc++_shared.so")
-        pickFirst("**/libjsc.so")
+        jniLibs.pickFirsts.add("**/libc++_shared.so")
+        jniLibs.pickFirsts.add("**/libjsc.so")
     }
 }
 
 configurations.all {
-    resolutionStrategy.eachDependency { details ->
+    resolutionStrategy.eachDependency { details: DependencyResolveDetails ->
         if (details.requested.group == "androidx.core" && details.requested.name == "core") {
             details.useVersion("1.12.0")
         }
