@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Payment {
   final String id;
   final String name;
   final double amount;
   final DateTime dueDate;
   final String category;
+  final String repeat;
   final bool isPaid;
-  final bool isRecurring;
-  final String notes;
 
   Payment({
     required this.id,
@@ -14,39 +15,10 @@ class Payment {
     required this.amount,
     required this.dueDate,
     required this.category,
-    this.isPaid = false,
-    this.isRecurring = false,
-    this.notes = '',
+    required this.repeat,
+    required this.isPaid,
   });
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'amount': amount,
-      'dueDate': dueDate.millisecondsSinceEpoch,
-      'category': category,
-      'isPaid': isPaid,
-      'isRecurring': isRecurring,
-      'notes': notes,
-    };
-  }
-
-  factory Payment.fromJson(Map<String, dynamic> json) {
-    return Payment(
-      id: json['id'] ?? '',
-      name: json['name'] ?? '',
-      amount: (json['amount'] ?? 0).toDouble(),
-      dueDate: DateTime.fromMillisecondsSinceEpoch(json['dueDate'] ?? 0),
-      category: json['category'] ?? 'Other',
-      isPaid: json['isPaid'] ?? false,
-      isRecurring: json['isRecurring'] ?? false,
-      notes: json['notes'] ?? '',
-    );
-  }
-
-  // Commented out Firebase methods
-  /*
   factory Payment.fromFirestore(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     return Payment(
@@ -54,10 +26,9 @@ class Payment {
       name: data['name'] ?? '',
       amount: (data['amount'] ?? 0).toDouble(),
       dueDate: (data['dueDate'] as Timestamp).toDate(),
-      category: data['category'] ?? 'Other',
+      category: data['category'] ?? 'other',
+      repeat: data['repeat'] ?? 'none',
       isPaid: data['isPaid'] ?? false,
-      isRecurring: data['isRecurring'] ?? false,
-      notes: data['notes'] ?? '',
     );
   }
 
@@ -67,12 +38,10 @@ class Payment {
       'amount': amount,
       'dueDate': Timestamp.fromDate(dueDate),
       'category': category,
+      'repeat': repeat,
       'isPaid': isPaid,
-      'isRecurring': isRecurring,
-      'notes': notes,
     };
   }
-  */
 
   Payment copyWith({
     String? id,
@@ -80,9 +49,8 @@ class Payment {
     double? amount,
     DateTime? dueDate,
     String? category,
+    String? repeat,
     bool? isPaid,
-    bool? isRecurring,
-    String? notes,
   }) {
     return Payment(
       id: id ?? this.id,
@@ -90,9 +58,8 @@ class Payment {
       amount: amount ?? this.amount,
       dueDate: dueDate ?? this.dueDate,
       category: category ?? this.category,
+      repeat: repeat ?? this.repeat,
       isPaid: isPaid ?? this.isPaid,
-      isRecurring: isRecurring ?? this.isRecurring,
-      notes: notes ?? this.notes,
     );
   }
 }

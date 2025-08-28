@@ -3,7 +3,7 @@ import 'package:payment_reminder_app/services/auth_service.dart';
 import 'package:payment_reminder_app/screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -39,11 +39,11 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
 
     _slideAnimation =
         Tween<Offset>(begin: const Offset(0, 0.5), end: Offset.zero).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut,
-      ),
-    );
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeInOut,
+          ),
+        );
 
     _animationController.forward();
   }

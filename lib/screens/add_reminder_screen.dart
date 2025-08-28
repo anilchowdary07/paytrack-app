@@ -1,120 +1,149 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:payment_reminder_app/models/payment_model.dart';
-import 'package:payment_reminder_app/services/firestore_service.dart';
-import 'package:payment_reminder_app/utils/app_colors.dart';
 
 class AddReminderScreen extends StatefulWidget {
-  const AddReminderScreen({super.key});
+  const AddReminderScreen({Key? key}) : super(key: key);
 
   @override
   State<AddReminderScreen> createState() => _AddReminderScreenState();
 }
 
 class _AddReminderScreenState extends State<AddReminderScreen> {
-  final FirestoreService _firestoreService = FirestoreService();
   final _formKey = GlobalKey<FormState>();
-  String _title = '';
-  double _amount = 0.0;
-  DateTime _dueDate = DateTime.now();
-  String _category = 'Other';
-  String _repeat = 'Never';
+  final _nameController = TextEditingController();
+  final _amountController = TextEditingController();
+  String _selectedCategory = 'Other';
+  DateTime _selectedDate = DateTime.now();
 
-  final List<String> _repeatOptions = ['Never', 'Daily', 'Weekly', 'Monthly'];
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      final newPayment = Payment(
-        id: '', // Firestore will generate this
-        name: _title,
-        amount: _amount,
-        dueDate: _dueDate,
-        category: _category,
-        repeat: _repeat,
-        isPaid: false,
-      );
-      _firestoreService.addPayment(newPayment.toFirestore());
-      Navigator.of(context).pop();
-    }
-  }
+  final List<String> _categories = [
+    'Rent',
+    'Utilities',
+    'Food',
+    'Transport',
+    'Entertainment',
+    'Health',
+    'Education',
+    'Shopping',
+    'Insurance',
+    'Other',
+  ];
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: theme.colorScheme.surface,
-        elevation: 0,
         title: Text(
-          'Add New Reminder',
+          'Add Reminder',
           style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        backgroundColor: theme.colorScheme.surface,
+        foregroundColor: theme.textTheme.titleLarge?.color,
+        elevation: 0,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
-                decoration: _inputDecoration('Title', Icons.title),
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Payment Name',
+                  border: OutlineInputBorder(),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a title.';
+                    return 'Please enter a payment name';
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  _title = value!;
-                },
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               TextFormField(
-                decoration: _inputDecoration('Amount', Icons.attach_money),
+                controller: _amountController,
+                decoration: const InputDecoration(
+                  labelText: 'Amount (₹)',
+                  border: OutlineInputBorder(),
+                ),
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  if (value == null || double.tryParse(value) == null) {
-                    return 'Please enter a valid amount.';
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter an amount';
+                  }
+                  if (double.tryParse(value) == null) {
+                    return 'Please enter a valid amount';
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  _amount = double.parse(value!);
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<String>(
+                value: _selectedCategory,
+                decoration: const InputDecoration(
+                  labelText: 'Category',
+                  border: OutlineInputBorder(),
+                ),
+                items: _categories.map((category) {
+                  return DropdownMenuItem(
+                    value: category,
+                    child: Text(category),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedCategory = value!;
+                  });
                 },
               ),
-              const SizedBox(height: 20),
-              _buildDatePicker(context),
-              const SizedBox(height: 20),
-              _buildCategorySelector(),
-              const SizedBox(height: 20),
-              _buildRepeatSelector(),
-              const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: _submitForm,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: theme.colorScheme.primary,
-                  foregroundColor: theme.colorScheme.onPrimary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 80,
-                    vertical: 20,
-                  ),
+              const SizedBox(height: 16),
+              ListTile(
+                title: const Text('Due Date'),
+                subtitle: Text(
+                  '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
                 ),
-                child: Text(
-                  'Add Reminder',
-                  style: GoogleFonts.poppins(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                trailing: const Icon(Icons.calendar_today),
+                onTap: () async {
+                  final date = await showDatePicker(
+                    context: context,
+                    initialDate: _selectedDate,
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime.now().add(const Duration(days: 365)),
+                  );
+                  if (date != null) {
+                    setState(() {
+                      _selectedDate = date;
+                    });
+                  }
+                },
+              ),
+              const Spacer(),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // For now, just show a success message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Reminder added successfully!'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                      Navigator.pop(context);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: Text(
+                    'Add Reminder',
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
@@ -125,81 +154,10 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
     );
   }
 
-  InputDecoration _inputDecoration(String label, IconData icon) {
-    return InputDecoration(
-      labelText: label,
-      prefixIcon: Icon(icon),
-      filled: true,
-      fillColor: Theme.of(context).colorScheme.surface,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide.none,
-      ),
-    );
-  }
-
-  Widget _buildDatePicker(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        final pickedDate = await showDatePicker(
-          context: context,
-          initialDate: _dueDate,
-          firstDate: DateTime(2020),
-          lastDate: DateTime(2101),
-        );
-        if (pickedDate != null && pickedDate != _dueDate) {
-          setState(() {
-            _dueDate = pickedDate;
-          });
-        }
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Row(
-          children: [
-            const Icon(Icons.calendar_today_outlined),
-            const SizedBox(width: 12),
-            Text(
-              'Due Date: ${DateFormat.yMMMd().format(_dueDate)}',
-              style: GoogleFonts.poppins(fontSize: 16),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCategorySelector() {
-    return DropdownButtonFormField<String>(
-      value: _category,
-      decoration: _inputDecoration('Category', Icons.category_outlined),
-      items: AppColors.categoryColors.keys.map((String value) {
-        return DropdownMenuItem<String>(value: value, child: Text(value));
-      }).toList(),
-      onChanged: (newValue) {
-        setState(() {
-          _category = newValue!;
-        });
-      },
-    );
-  }
-
-  Widget _buildRepeatSelector() {
-    return DropdownButtonFormField<String>(
-      value: _repeat,
-      decoration: _inputDecoration('Repeat', Icons.repeat),
-      items: _repeatOptions.map((String value) {
-        return DropdownMenuItem<String>(value: value, child: Text(value));
-      }).toList(),
-      onChanged: (newValue) {
-        setState(() {
-          _repeat = newValue!;
-        });
-      },
-    );
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _amountController.dispose();
+    super.dispose();
   }
 }

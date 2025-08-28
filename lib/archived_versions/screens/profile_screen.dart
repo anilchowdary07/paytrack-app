@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:payment_reminder_app/models/user_model.dart';
 import 'package:payment_reminder_app/models/payment_model.dart';
-// import 'package:payment_reminder_app/providers/theme_provider.dart';
+import 'package:payment_reminder_app/providers/theme_provider.dart';
 import 'package:payment_reminder_app/services/auth_service.dart';
 import 'package:payment_reminder_app/screens/notification_settings_screen.dart';
 import 'package:payment_reminder_app/screens/edit_profile_screen.dart';
-// import 'package:provider/provider.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -109,8 +109,9 @@ class ProfileScreen extends StatelessWidget {
       ),
       child: CircleAvatar(
         radius: 50,
-        backgroundImage:
-            user.photoURL != null ? NetworkImage(user.photoURL!) : null,
+        backgroundImage: user.photoURL != null
+            ? NetworkImage(user.photoURL!)
+            : null,
         backgroundColor: Colors.white,
         child: user.photoURL == null
             ? Icon(Icons.person, size: 60, color: Colors.grey[600])

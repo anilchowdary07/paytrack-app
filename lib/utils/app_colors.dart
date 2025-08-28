@@ -1,34 +1,43 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primary = Color(0xFF4A148C);
-  static const Color accent = Color(0xFFF50057);
-
-  static const Map<String, Color> categoryColors = {
-    'Rent': Color(0xFFE57373),
-    'Electricity': Color(0xFFFFD54F),
-    'Water': Color(0xFF64B5F6),
-    'Internet': Color(0xFF81C784),
-    'Subscription': Color(0xFFBA68C8),
-    'Loan': Color(0xFF9575CD),
-    'Other': Color(0xFFB0BEC5),
-  };
-
-  static const Map<String, Color> categoryBgColors = {
-    'Rent': Color(0xFFFFEBEE),
-    'Electricity': Color(0xFFFFF8E1),
-    'Water': Color(0xFFE3F2FD),
-    'Internet': Color(0xFFE8F5E9),
-    'Subscription': Color(0xFFF3E5F5),
-    'Loan': Color(0xFFEDE7F6),
-    'Other': Color(0xFFECEFF1),
-  };
+  static const Color primary = Color(0xFF6366F1);
+  static const Color secondary = Color(0xFF8B5CF6);
+  static const Color success = Color(0xFF10B981);
+  static const Color warning = Color(0xFFF59E0B);
+  static const Color error = Color(0xFFEF4444);
+  static const Color info = Color(0xFF3B82F6);
 
   static Color getIconColor(String category) {
-    return categoryColors[category] ?? categoryColors['Other']!;
+    switch (category.toLowerCase()) {
+      case 'rent':
+      case 'housing':
+        return const Color(0xFF8B5CF6);
+      case 'utilities':
+        return const Color(0xFF10B981);
+      case 'food':
+      case 'groceries':
+        return const Color(0xFFF59E0B);
+      case 'transport':
+      case 'transportation':
+        return const Color(0xFF3B82F6);
+      case 'entertainment':
+        return const Color(0xFFEC4899);
+      case 'health':
+      case 'healthcare':
+        return const Color(0xFFEF4444);
+      case 'education':
+        return const Color(0xFF06B6D4);
+      case 'shopping':
+        return const Color(0xFF84CC16);
+      case 'insurance':
+        return const Color(0xFF6366F1);
+      default:
+        return const Color(0xFF6B7280);
+    }
   }
 
-  static Color getIconBgColor(String category) {
-    return categoryBgColors[category] ?? categoryBgColors['Other']!;
+  static Color getCategoryColor(String category) {
+    return getIconColor(category);
   }
 }
