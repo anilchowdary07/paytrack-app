@@ -218,7 +218,7 @@ class DataService {
   static DateTime _calculateNextDueDate(DateTime currentDate, String interval) {
     switch (interval.toLowerCase()) {
       case 'weekly':
-        return currentDate.add(Duration(days: 7));
+        return currentDate.add(const Duration(days: 7));
       case 'monthly':
         return DateTime(
             currentDate.year, currentDate.month + 1, currentDate.day);
@@ -226,12 +226,14 @@ class DataService {
         return DateTime(
             currentDate.year + 1, currentDate.month, currentDate.day);
       default:
-        return currentDate.add(Duration(days: 30)); // Default to monthly
+        return currentDate.add(const Duration(days: 30)); // Default to monthly
     }
   }
 }
 
 class PayTrackPremiumApp extends StatelessWidget {
+  const PayTrackPremiumApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -249,6 +251,8 @@ class PayTrackPremiumApp extends StatelessWidget {
 
 // Welcome Screen
 class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -261,7 +265,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   _checkLoginStatus() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
@@ -290,19 +294,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.account_balance_wallet,
                   size: 80,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 30),
-              Text(
+              const SizedBox(height: 30),
+              const Text(
                 'PayTrack Premium',
                 style: TextStyle(
                   fontSize: 32,
@@ -310,7 +314,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Your Smart Finance Companion',
                 style: TextStyle(
@@ -318,8 +322,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   color: Colors.white.withOpacity(0.8),
                 ),
               ),
-              SizedBox(height: 50),
-              CircularProgressIndicator(color: Colors.white),
+              const SizedBox(height: 50),
+              const CircularProgressIndicator(color: Colors.white),
             ],
           ),
         ),
@@ -330,6 +334,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
 // Login Screen
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -362,7 +368,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       // Simulate network delay
-      await Future.delayed(Duration(milliseconds: 1500));
+      await Future.delayed(const Duration(milliseconds: 1500));
 
       // Basic validation
       if (_isLogin) {
@@ -446,7 +452,7 @@ class _LoginScreenState extends State<LoginScreen> {
       SnackBar(
         content: Text(message),
         backgroundColor: Colors.red,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
@@ -496,25 +502,25 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         child: SafeArea(
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             child: Form(
               key: _formKey,
               child: Column(
                 children: [
-                  SizedBox(height: 60),
+                  const SizedBox(height: 60),
                   Container(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: Colors.blue.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.account_balance_wallet,
                       size: 60,
                       color: Colors.blue,
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Text(
                     _isLogin ? 'Welcome Back!' : 'Create Account',
                     style: TextStyle(
@@ -523,7 +529,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.grey.shade800,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     _isLogin
                         ? 'Sign in to continue'
@@ -533,7 +539,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.grey.shade600,
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
                   // Name Field (only for registration)
                   if (!_isLogin) ...[
@@ -545,14 +551,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.1),
                             blurRadius: 10,
-                            offset: Offset(0, 5),
+                            offset: const Offset(0, 5),
                           ),
                         ],
                       ),
                       child: TextFormField(
                         controller: _nameController,
                         validator: _validateName,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.person, color: Colors.blue),
                           hintText: 'Full Name',
                           border: InputBorder.none,
@@ -560,7 +566,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                   ],
 
                   // Email Field
@@ -572,7 +578,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.1),
                           blurRadius: 10,
-                          offset: Offset(0, 5),
+                          offset: const Offset(0, 5),
                         ),
                       ],
                     ),
@@ -580,7 +586,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: _emailController,
                       validator: _validateEmail,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.email, color: Colors.blue),
                         hintText: 'Email Address',
                         border: InputBorder.none,
@@ -588,7 +594,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   // Password Field
                   Container(
@@ -599,7 +605,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.1),
                           blurRadius: 10,
-                          offset: Offset(0, 5),
+                          offset: const Offset(0, 5),
                         ),
                       ],
                     ),
@@ -608,7 +614,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: _validatePassword,
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock, color: Colors.blue),
+                        prefixIcon: const Icon(Icons.lock, color: Colors.blue),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _obscurePassword
@@ -624,14 +630,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         hintText: 'Password',
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(20),
+                        contentPadding: const EdgeInsets.all(20),
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   // Login Button
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: 55,
                     child: ElevatedButton(
@@ -644,7 +650,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         elevation: 5,
                       ),
                       child: _isLoading
-                          ? Row(
+                          ? const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(
@@ -663,7 +669,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             )
                           : Text(
                               _isLogin ? 'Sign In' : 'Create Account',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -671,7 +677,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   // Toggle Login/Register
                   TextButton(
@@ -680,16 +686,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       _isLogin
                           ? "Don't have an account? Sign Up"
                           : "Already have an account? Sign In",
-                      style: TextStyle(color: Colors.blue, fontSize: 16),
+                      style: const TextStyle(color: Colors.blue, fontSize: 16),
                     ),
                   ),
 
                   if (_isLogin) ...[
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content:
                                 Text('Password reset feature coming soon!'),
                             backgroundColor: Colors.orange,
@@ -715,13 +721,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
 // Main Screen with Navigation
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   late NotificationServiceLib.NotificationService _notificationService;
 
   @override
@@ -739,7 +747,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _checkNotifications() {
-    Future.delayed(Duration(minutes: 1), () {
+    Future.delayed(const Duration(minutes: 1), () {
       if (mounted) {
         _notificationService.checkAndShowDueNotifications();
         _checkNotifications(); // Recursive call for continuous checking
@@ -757,7 +765,7 @@ class _MainScreenState extends State<MainScreen> {
           DashboardScreen(onNavigateToPage: (pageIndex) {
             setState(() => _currentIndex = pageIndex);
             _pageController.animateToPage(pageIndex,
-                duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+                duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
           }),
           PaymentRemindersScreen(),
           SpendingTrackingScreen(),
@@ -767,24 +775,24 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30), topRight: Radius.circular(30)),
           boxShadow: [
             BoxShadow(
                 color: Colors.grey.withOpacity(0.3),
                 blurRadius: 20,
-                offset: Offset(0, -5)),
+                offset: const Offset(0, -5)),
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30), topRight: Radius.circular(30)),
           child: BottomNavigationBar(
             currentIndex: _currentIndex,
             onTap: (index) {
               setState(() => _currentIndex = index);
               _pageController.animateToPage(index,
-                  duration: Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut);
             },
             type: BottomNavigationBarType.fixed,
@@ -792,7 +800,7 @@ class _MainScreenState extends State<MainScreen> {
             unselectedItemColor: Colors.grey,
             backgroundColor: Colors.white,
             elevation: 0,
-            items: [
+            items: const [
               BottomNavigationBarItem(
                   icon: Icon(Icons.dashboard), label: 'Dashboard'),
               BottomNavigationBarItem(
@@ -815,7 +823,7 @@ class _MainScreenState extends State<MainScreen> {
 class DashboardScreen extends StatefulWidget {
   final Function(int)? onNavigateToPage;
 
-  const DashboardScreen({Key? key, this.onNavigateToPage}) : super(key: key);
+  const DashboardScreen({super.key, this.onNavigateToPage});
 
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
@@ -869,7 +877,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     int pendingCount = allReminders.length;
 
     // Calculate upcoming payments (next 7 days)
-    DateTime nextWeek = now.add(Duration(days: 7));
+    DateTime nextWeek = now.add(const Duration(days: 7));
     double upcomingTotal = allReminders
         .where((r) => r.dueDate.isBefore(nextWeek))
         .fold(0.0, (sum, r) => sum + r.amount);
@@ -877,7 +885,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     // Get recent items
     List<PaymentReminder> recentRemindersList = allReminders.take(3).toList();
     List<SpendingEntry> recentExpensesList = allExpenses
-        .where((e) => e.date.isAfter(today.subtract(Duration(days: 1))))
+        .where((e) => e.date.isAfter(today.subtract(const Duration(days: 1))))
         .take(3)
         .toList();
 
@@ -911,14 +919,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.notifications, color: Colors.blue),
             SizedBox(width: 8),
             Text('Notifications'),
           ],
         ),
-        content: Container(
+        content: SizedBox(
           width: double.maxFinite,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -927,10 +935,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               if (pendingNotifications.isNotEmpty) ...[
                 Text(
                     '📅 Scheduled Notifications (${pendingNotifications.length})',
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.blue)),
-                SizedBox(height: 8),
-                Container(
+                const SizedBox(height: 8),
+                SizedBox(
                   height: pendingNotifications.length > 3 ? 150 : null,
                   child: ListView.builder(
                     shrinkWrap: true,
@@ -940,22 +948,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       final scheduledTime =
                           notification['scheduledTime'] as DateTime;
                       return Card(
-                        margin: EdgeInsets.symmetric(vertical: 2),
+                        margin: const EdgeInsets.symmetric(vertical: 2),
                         child: ListTile(
                           dense: true,
-                          leading: Icon(Icons.schedule,
+                          leading: const Icon(Icons.schedule,
                               color: Colors.green, size: 20),
                           title: Text(notification['title'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w600)),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(notification['body'],
-                                  style: TextStyle(fontSize: 12)),
+                                  style: const TextStyle(fontSize: 12)),
                               Text(
                                   '⏰ ${scheduledTime.day}/${scheduledTime.month} at ${scheduledTime.hour}:${scheduledTime.minute.toString().padLeft(2, '0')}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 10, color: Colors.grey)),
                             ],
                           ),
@@ -964,39 +972,39 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     },
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
               ],
-              Text('🚨 Urgent Payments',
+              const Text('🚨 Urgent Payments',
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.red)),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               if (urgentReminders.isEmpty)
-                Text('No urgent payments due',
+                const Text('No urgent payments due',
                     style: TextStyle(color: Colors.grey))
               else
                 ...urgentReminders
                     .map((r) => Card(
-                          margin: EdgeInsets.symmetric(vertical: 2),
+                          margin: const EdgeInsets.symmetric(vertical: 2),
                           child: ListTile(
                             dense: true,
-                            leading: Icon(Icons.warning,
+                            leading: const Icon(Icons.warning,
                                 color: Colors.orange, size: 20),
-                            title: Text(r.name, style: TextStyle(fontSize: 14)),
+                            title: Text(r.name, style: const TextStyle(fontSize: 14)),
                             subtitle: Text(
                                 'Due: ${r.dueDate.day}/${r.dueDate.month}',
-                                style: TextStyle(fontSize: 12)),
+                                style: const TextStyle(fontSize: 12)),
                             trailing: Text('₹${r.amount.toStringAsFixed(0)}',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                                style: const TextStyle(fontWeight: FontWeight.bold)),
                           ),
                         ))
-                    .toList(),
+                    ,
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
           if (pendingNotifications.isNotEmpty)
             ElevatedButton(
@@ -1009,7 +1017,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       builder: (context) => NotificationSettingsScreen()),
                 );
               },
-              child: Text('Settings'),
+              child: const Text('Settings'),
             ),
         ],
       ),
@@ -1020,7 +1028,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AddReminderScreen(),
+        builder: (context) => const AddReminderScreen(),
       ),
     );
     if (result == true) {
@@ -1070,7 +1078,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Text(getGreeting(),
                 style: TextStyle(fontSize: 16, color: Colors.grey.shade600)),
             Text('Welcome $userName',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)),
@@ -1079,18 +1087,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
         actions: [
           IconButton(
             onPressed: _showNotifications,
-            icon: Icon(Icons.notifications_outlined, color: Colors.black),
+            icon: const Icon(Icons.notifications_outlined, color: Colors.black),
           ),
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Monthly Spending Card
             Container(
-              padding: EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.blue.shade600, Colors.blue.shade800],
@@ -1102,7 +1110,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   BoxShadow(
                       color: Colors.blue.withOpacity(0.3),
                       blurRadius: 20,
-                      offset: Offset(0, 10)),
+                      offset: const Offset(0, 10)),
                 ],
               ),
               child: Column(
@@ -1115,20 +1123,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           style: TextStyle(
                               color: Colors.white.withOpacity(0.8),
                               fontSize: 16)),
-                      Icon(Icons.trending_up, color: Colors.white),
+                      const Icon(Icons.trending_up, color: Colors.white),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text('₹${monthlySpent.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 32,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text('of ₹${monthlyLimit.toStringAsFixed(0)} limit',
                       style: TextStyle(
                           color: Colors.white.withOpacity(0.8), fontSize: 14)),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   LinearProgressIndicator(
                     value: spentPercentage,
                     backgroundColor: Colors.white.withOpacity(0.3),
@@ -1136,7 +1144,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       spentPercentage > 0.8 ? Colors.red : Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     '${(spentPercentage * 100).toStringAsFixed(1)}% of budget used',
                     style: TextStyle(
@@ -1145,7 +1153,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Summary Cards
             Row(
@@ -1159,7 +1167,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Colors.orange,
                   ),
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Expanded(
                   child: _buildSummaryCard(
                     'Upcoming',
@@ -1171,22 +1179,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Quick Actions
-            Text('Quick Actions',
+            const Text('Quick Actions',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Row(
               children: [
                 Expanded(
                     child: _buildActionCard('Add Payment', Icons.add,
                         Colors.blue, _navigateToAddPayment)),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Expanded(
                     child: _buildActionCard('Set Limit', Icons.savings,
                         Colors.purple, _navigateToSetLimits)),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Expanded(
                     child: _buildActionCard(
                         'View Reports', Icons.bar_chart, Colors.teal, () {
@@ -1197,12 +1205,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 })),
               ],
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Recent Activity
-            Text('Recent Activity',
+            const Text('Recent Activity',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             ...recentReminders.map((reminder) {
               final daysDiff =
                   reminder.dueDate.difference(DateTime.now()).inDays;
@@ -1265,11 +1273,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   });
                 },
               );
-            }).toList(),
+            }),
 
             if (recentReminders.isEmpty)
               Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(15),
@@ -1278,20 +1286,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   children: [
                     Icon(Icons.event_available,
                         size: 50, color: Colors.grey.shade400),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text('No payment reminders yet',
                         style: TextStyle(
                             color: Colors.grey.shade600, fontSize: 16)),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text('Add your first payment reminder to get started',
                         style: TextStyle(
                             color: Colors.grey.shade500, fontSize: 12),
                         textAlign: TextAlign.center),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     ElevatedButton.icon(
                       onPressed: _navigateToAddPayment,
-                      icon: Icon(Icons.add),
-                      label: Text('Add Payment'),
+                      icon: const Icon(Icons.add),
+                      label: const Text('Add Payment'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                         foregroundColor: Colors.white,
@@ -1312,7 +1320,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildSummaryCard(String title, String value, IconData icon,
       Color bgColor, Color iconColor) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(15),
@@ -1321,10 +1329,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, color: iconColor, size: 30),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Text(title,
               style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(value,
               style: TextStyle(
                   fontSize: 20, fontWeight: FontWeight.bold, color: iconColor)),
@@ -1338,7 +1346,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(15),
@@ -1346,7 +1354,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           children: [
             Icon(icon, color: color, size: 25),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(title,
                 style: TextStyle(
                     fontSize: 11, fontWeight: FontWeight.w600, color: color),
@@ -1363,8 +1371,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(bottom: 10),
-        padding: EdgeInsets.all(15),
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
@@ -1372,20 +1380,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
             BoxShadow(
                 color: Colors.grey.withOpacity(0.1),
                 blurRadius: 10,
-                offset: Offset(0, 5))
+                offset: const Offset(0, 5))
           ],
         ),
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: color.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(icon, color: color, size: 20),
             ),
-            SizedBox(width: 15),
+            const SizedBox(width: 15),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1394,12 +1402,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     children: [
                       Expanded(
                         child: Text(title,
-                            style: TextStyle(fontWeight: FontWeight.w600)),
+                            style: const TextStyle(fontWeight: FontWeight.w600)),
                       ),
                       if (priority != null && priority == 'high')
                         Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: Colors.red.shade100,
                             borderRadius: BorderRadius.circular(8),
@@ -1419,7 +1427,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
             Text(amount,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           ],
         ),
       ),
@@ -1429,6 +1437,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
 // Payment Reminders Screen
 class PaymentRemindersScreen extends StatefulWidget {
+  const PaymentRemindersScreen({super.key});
+
   @override
   _PaymentRemindersScreenState createState() => _PaymentRemindersScreenState();
 }
@@ -1456,17 +1466,17 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Payment Reminders',
+        title: const Text('Payment Reminders',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
             onPressed: _addReminder,
-            icon: Icon(Icons.add, color: Colors.blue),
+            icon: const Icon(Icons.add, color: Colors.blue),
           ),
         ],
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         itemCount: reminders.length,
         itemBuilder: (context, index) {
           final reminder = reminders[index];
@@ -1493,8 +1503,8 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
     }
 
     return Container(
-      margin: EdgeInsets.only(bottom: 15),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -1502,7 +1512,7 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
           BoxShadow(
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 15,
-              offset: Offset(0, 5))
+              offset: const Offset(0, 5))
         ],
       ),
       child: Column(
@@ -1516,26 +1526,26 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(reminder.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Row(
                       children: [
                         Text(reminder.category,
                             style: TextStyle(
                                 color: Colors.grey.shade600, fontSize: 14)),
                         if (reminder.isRecurring) ...[
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
                               color: Colors.blue.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              '${reminder.repeatInterval.toUpperCase()}',
-                              style: TextStyle(
+                              reminder.repeatInterval.toUpperCase(),
+                              style: const TextStyle(
                                 color: Colors.blue,
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
@@ -1544,9 +1554,9 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                           ),
                         ],
                         if (reminder.priority != 'medium') ...[
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
                               color: _getPriorityColor(reminder.priority)
@@ -1566,7 +1576,7 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                       ],
                     ),
                     if (reminder.notes.isNotEmpty) ...[
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Text(
                         reminder.notes,
                         style: TextStyle(
@@ -1582,10 +1592,10 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                 ),
               ),
               Text('₹${reminder.amount.toStringAsFixed(0)}',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ],
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1597,14 +1607,14 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                           TextStyle(color: Colors.grey.shade600, fontSize: 12)),
                   Text(
                       '${reminder.dueDate.day}/${reminder.dueDate.month}/${reminder.dueDate.year}',
-                      style: TextStyle(fontWeight: FontWeight.w600)),
-                  SizedBox(height: 5),
+                      style: const TextStyle(fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 5),
                   Row(
                     children: [
-                      Icon(Icons.notifications_active,
+                      const Icon(Icons.notifications_active,
                           color: Colors.blue, size: 14),
-                      SizedBox(width: 4),
-                      Text('${reminder.reminderTime.format(context)}',
+                      const SizedBox(width: 4),
+                      Text(reminder.reminderTime.format(context),
                           style: TextStyle(
                               color: Colors.blue.shade600,
                               fontSize: 12,
@@ -1617,7 +1627,7 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: statusColor.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(20),
@@ -1629,7 +1639,7 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                             fontSize: 12)),
                   ),
                   if (reminder.reminderDaysBefore.isNotEmpty) ...[
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       'Remind ${reminder.reminderDaysBefore.join(", ")} days before',
                       style:
@@ -1640,7 +1650,7 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
               ),
             ],
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Row(
             children: [
               Expanded(
@@ -1651,11 +1661,11 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                   ),
-                  child: Text('Mark as Paid',
+                  child: const Text('Mark as Paid',
                       style: TextStyle(color: Colors.white)),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               ElevatedButton(
                 onPressed: () => _editReminder(index),
                 style: ElevatedButton.styleFrom(
@@ -1663,7 +1673,7 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ),
-                child: Icon(Icons.edit, color: Colors.white),
+                child: const Icon(Icons.edit, color: Colors.white),
               ),
             ],
           ),
@@ -1708,18 +1718,18 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
     bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Mark as Paid'),
+        title: const Text('Mark as Paid'),
         content: Text(
             'Mark "${reminder.name}" as paid for ₹${reminder.amount.toStringAsFixed(2)}?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-            child: Text('Mark as Paid', style: TextStyle(color: Colors.white)),
+            child: const Text('Mark as Paid', style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -1759,6 +1769,8 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
 
 // Spending Tracking Screen
 class SpendingTrackingScreen extends StatefulWidget {
+  const SpendingTrackingScreen({super.key});
+
   @override
   _SpendingTrackingScreenState createState() => _SpendingTrackingScreenState();
 }
@@ -1820,7 +1832,7 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
     // Check last 7 days for unused budget
     for (int i = 1; i <= 7; i++) {
       DateTime dayStart = startOfToday.subtract(Duration(days: i));
-      DateTime dayEnd = dayStart.add(Duration(days: 1));
+      DateTime dayEnd = dayStart.add(const Duration(days: 1));
 
       // Calculate spending for that day
       double daySpending = allExpenses.where((expense) {
@@ -1846,23 +1858,23 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Spending Tracking',
+        title: const Text('Spending Tracking',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
             onPressed: _setDailyLimit,
-            icon: Icon(Icons.settings, color: Colors.blue),
+            icon: const Icon(Icons.settings, color: Colors.blue),
           ),
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Daily Spending Card
             Container(
-              padding: EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.purple.shade600, Colors.purple.shade800],
@@ -1874,7 +1886,7 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                   BoxShadow(
                       color: Colors.purple.withOpacity(0.3),
                       blurRadius: 20,
-                      offset: Offset(0, 10))
+                      offset: const Offset(0, 10))
                 ],
               ),
               child: Column(
@@ -1887,16 +1899,16 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                           style: TextStyle(
                               color: Colors.white.withOpacity(0.8),
                               fontSize: 16)),
-                      Icon(Icons.today, color: Colors.white),
+                      const Icon(Icons.today, color: Colors.white),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text('₹${todaySpent.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 32,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Row(
                     children: [
                       Text(
@@ -1905,16 +1917,16 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                               color: Colors.white.withOpacity(0.8),
                               fontSize: 14)),
                       if (carryoverAmount > 0) ...[
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: Colors.green.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text('+₹${carryoverAmount.toStringAsFixed(0)}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold)),
@@ -1923,14 +1935,14 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                     ],
                   ),
                   if (carryoverAmount > 0) ...[
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                         '(₹${baseDailyLimit.toStringAsFixed(0)} base + ₹${carryoverAmount.toStringAsFixed(0)} carryover)',
                         style: TextStyle(
                             color: Colors.white.withOpacity(0.6),
                             fontSize: 12)),
                   ],
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   LinearProgressIndicator(
                     value: spentPercentage,
                     backgroundColor: Colors.white.withOpacity(0.3),
@@ -1938,7 +1950,7 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                       spentPercentage > 0.8 ? Colors.red : Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -1955,20 +1967,20 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Add Expense Button
-            Container(
+            SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: _addExpense,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.add, color: Colors.white),
@@ -1982,16 +1994,16 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Today's Expenses
-            Text('Today\'s Expenses',
+            const Text('Today\'s Expenses',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: todaySpending.length,
               itemBuilder: (context, index) {
                 final expense = todaySpending[index];
@@ -2027,8 +2039,8 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
     }
 
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.all(15),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -2036,26 +2048,26 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
           BoxShadow(
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 10,
-              offset: Offset(0, 5))
+              offset: const Offset(0, 5))
         ],
       ),
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: categoryColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(categoryIcon, color: categoryColor, size: 20),
           ),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(expense.name,
-                    style: TextStyle(fontWeight: FontWeight.w600)),
+                    style: const TextStyle(fontWeight: FontWeight.w600)),
                 Text(expense.category,
                     style:
                         TextStyle(color: Colors.grey.shade600, fontSize: 12)),
@@ -2066,10 +2078,10 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text('₹${expense.amount.toStringAsFixed(2)}',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
               IconButton(
                 onPressed: () => _deleteExpense(index),
-                icon: Icon(Icons.delete, color: Colors.red, size: 18),
+                icon: const Icon(Icons.delete, color: Colors.red, size: 18),
               ),
             ],
           ),
@@ -2103,21 +2115,21 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
       builder: (context) {
         double newLimit = dailyLimit;
         return AlertDialog(
-          title: Text('Set Daily Limit'),
+          title: const Text('Set Daily Limit'),
           content: TextField(
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Daily Limit (₹)'),
+            decoration: const InputDecoration(labelText: 'Daily Limit (₹)'),
             onChanged: (value) =>
                 newLimit = double.tryParse(value) ?? dailyLimit,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () => Navigator.pop(context, newLimit),
-              child: Text('Set'),
+              child: const Text('Set'),
             ),
           ],
         );
@@ -2152,6 +2164,8 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
 
 // Analytics Screen
 class AnalyticsScreen extends StatefulWidget {
+  const AnalyticsScreen({super.key});
+
   @override
   _AnalyticsScreenState createState() => _AnalyticsScreenState();
 }
@@ -2188,7 +2202,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
     // Calculate weekly trends
     DateTime thisWeekStart = now.subtract(Duration(days: now.weekday - 1));
-    DateTime lastWeekStart = thisWeekStart.subtract(Duration(days: 7));
+    DateTime lastWeekStart = thisWeekStart.subtract(const Duration(days: 7));
 
     double thisWeekSpending = allExpenses
         .where((e) => e.date.isAfter(thisWeekStart))
@@ -2217,17 +2231,17 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Analytics',
+        title: const Text('Analytics',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Monthly Overview
             Container(
-              padding: EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.teal.shade600, Colors.teal.shade800],
@@ -2239,7 +2253,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   BoxShadow(
                       color: Colors.teal.withOpacity(0.3),
                       blurRadius: 20,
-                      offset: Offset(0, 10))
+                      offset: const Offset(0, 10))
                 ],
               ),
               child: Column(
@@ -2248,25 +2262,25 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   Text('Monthly Overview',
                       style: TextStyle(
                           color: Colors.white.withOpacity(0.8), fontSize: 16)),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text('₹${monthlySpent.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 32,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text('Total spent this month',
                       style: TextStyle(
                           color: Colors.white.withOpacity(0.8), fontSize: 14)),
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Category Breakdown
-            Text('Spending by Category',
+            const Text('Spending by Category',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             // Show dynamic category items
             ...categorySpending.entries.map((entry) {
@@ -2275,24 +2289,24 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               Color color = _getCategoryColor(entry.key);
               return _buildCategoryItem(
                   entry.key, entry.value, percentage, color);
-            }).toList(),
+            }),
 
             if (categorySpending.isEmpty)
               Container(
-                padding: EdgeInsets.all(20),
-                child: Text('No spending data available for this month',
+                padding: const EdgeInsets.all(20),
+                child: const Text('No spending data available for this month',
                     style: TextStyle(color: Colors.grey)),
               ),
 
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Spending Trends
-            Text('Spending Trends',
+            const Text('Spending Trends',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
@@ -2300,17 +2314,17 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
                       blurRadius: 15,
-                      offset: Offset(0, 5))
+                      offset: const Offset(0, 5))
                 ],
               ),
               child: Column(
                 children: [
                   _buildTrendItem('This Week', '₹345.50', '+12%', Colors.red),
-                  Divider(),
+                  const Divider(),
                   _buildTrendItem('Last Week', '₹308.25', '-5%', Colors.green),
-                  Divider(),
+                  const Divider(),
                   _buildTrendItem('This Month', '₹1,250.75', '+8%', Colors.red),
-                  Divider(),
+                  const Divider(),
                   _buildTrendItem(
                       'Last Month', '₹1,156.40', '-15%', Colors.green),
                 ],
@@ -2340,8 +2354,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   Widget _buildCategoryItem(
       String category, double amount, double percentage, Color color) {
     return Container(
-      margin: EdgeInsets.only(bottom: 15),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -2349,7 +2363,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
           BoxShadow(
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 10,
-              offset: Offset(0, 5))
+              offset: const Offset(0, 5))
         ],
       ),
       child: Column(
@@ -2357,18 +2371,18 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(category, style: TextStyle(fontWeight: FontWeight.w600)),
+              Text(category, style: const TextStyle(fontWeight: FontWeight.w600)),
               Text('₹${amount.toStringAsFixed(2)}',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           LinearProgressIndicator(
             value: percentage,
             backgroundColor: Colors.grey.shade200,
             valueColor: AlwaysStoppedAnimation<Color>(color),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -2389,13 +2403,13 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(period, style: TextStyle(fontWeight: FontWeight.w600)),
+        Text(period, style: const TextStyle(fontWeight: FontWeight.w600)),
         Row(
           children: [
-            Text(amount, style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(width: 10),
+            Text(amount, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(width: 10),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: changeColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
@@ -2415,6 +2429,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
 // Payment History Screen
 class PaymentHistoryScreen extends StatefulWidget {
+  const PaymentHistoryScreen({super.key});
+
   @override
   _PaymentHistoryScreenState createState() => _PaymentHistoryScreenState();
 }
@@ -2461,23 +2477,23 @@ class _PaymentHistoryScreenState extends State<PaymentHistoryScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Export Data'),
+        title: const Text('Export Data'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.file_copy, color: Colors.blue),
-              title: Text('Export as Text'),
-              subtitle: Text('Simple text format'),
+              leading: const Icon(Icons.file_copy, color: Colors.blue),
+              title: const Text('Export as Text'),
+              subtitle: const Text('Simple text format'),
               onTap: () {
                 Navigator.pop(context);
                 _performTextExport();
               },
             ),
             ListTile(
-              leading: Icon(Icons.table_chart, color: Colors.green),
-              title: Text('Export Summary'),
-              subtitle: Text('Overview and statistics'),
+              leading: const Icon(Icons.table_chart, color: Colors.green),
+              title: const Text('Export Summary'),
+              subtitle: const Text('Overview and statistics'),
               onTap: () {
                 Navigator.pop(context);
                 _performSummaryExport();
@@ -2488,7 +2504,7 @@ class _PaymentHistoryScreenState extends State<PaymentHistoryScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
         ],
       ),
@@ -2518,23 +2534,23 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content:
-            Text('Data exported! (In a real app, this would save to file)'),
-        duration: Duration(seconds: 3),
+            const Text('Data exported! (In a real app, this would save to file)'),
+        duration: const Duration(seconds: 3),
         action: SnackBarAction(
           label: 'View',
           onPressed: () {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: Text('Export Preview'),
+                title: const Text('Export Preview'),
                 content: SingleChildScrollView(
                   child: Text(exportText,
-                      style: TextStyle(fontFamily: 'monospace', fontSize: 12)),
+                      style: const TextStyle(fontFamily: 'monospace', fontSize: 12)),
                 ),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: Text('Close'),
+                    child: const Text('Close'),
                   ),
                 ],
               ),
@@ -2552,7 +2568,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
       SnackBar(
         content: Text(
             'Summary exported! Total: ₹${analytics['thisMonthSpending'].toStringAsFixed(2)} this month'),
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
@@ -2600,16 +2616,16 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Reports & Analytics',
+        title: const Text('Reports & Analytics',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
-            icon: Icon(Icons.file_download, color: Colors.green),
+            icon: const Icon(Icons.file_download, color: Colors.green),
             onPressed: _exportData,
             tooltip: 'Export Data',
           ),
           IconButton(
-            icon: Icon(Icons.refresh, color: Colors.blue),
+            icon: const Icon(Icons.refresh, color: Colors.blue),
             onPressed: _loadReportsData,
           ),
         ],
@@ -2618,7 +2634,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
           labelColor: Colors.blue,
           unselectedLabelColor: Colors.grey,
           indicatorColor: Colors.blue,
-          tabs: [
+          tabs: const [
             Tab(text: 'Overview', icon: Icon(Icons.analytics, size: 20)),
             Tab(text: 'History', icon: Icon(Icons.history, size: 20)),
             Tab(text: 'Trends', icon: Icon(Icons.trending_up, size: 20)),
@@ -2626,7 +2642,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
         ),
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : TabBarView(
               controller: _tabController,
               children: [
@@ -2642,13 +2658,13 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
     final analytics = _generateAnalytics();
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Monthly Summary Card
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [Colors.teal.shade600, Colors.teal.shade800],
@@ -2660,7 +2676,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                 BoxShadow(
                     color: Colors.teal.withOpacity(0.3),
                     blurRadius: 15,
-                    offset: Offset(0, 5))
+                    offset: const Offset(0, 5))
               ],
             ),
             child: Column(
@@ -2672,16 +2688,16 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                         style: TextStyle(
                             color: Colors.white.withOpacity(0.8),
                             fontSize: 16)),
-                    Icon(Icons.calendar_today, color: Colors.white),
+                    const Icon(Icons.calendar_today, color: Colors.white),
                   ],
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Text('₹${analytics['thisMonthSpending'].toStringAsFixed(2)}',
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 28,
                         fontWeight: FontWeight.bold)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -2696,7 +2712,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                           : Colors.green.shade300,
                       size: 20,
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     Text(
                       '${((analytics['thisMonthSpending'] - analytics['lastMonthSpending']) / (analytics['lastMonthSpending'] == 0 ? 1 : analytics['lastMonthSpending']) * 100).toStringAsFixed(1)}% vs last month',
                       style: TextStyle(
@@ -2707,7 +2723,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Stats Grid
           Row(
@@ -2719,7 +2735,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                     Icons.check_circle,
                     Colors.green),
               ),
-              SizedBox(width: 15),
+              const SizedBox(width: 15),
               Expanded(
                 child: _buildStatCard(
                     'Total Reminders',
@@ -2729,12 +2745,12 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
               ),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Category Breakdown
-          Text('Spending by Category',
+          const Text('Spending by Category',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           ...analytics['categoryBreakdown']
               .entries
               .map((entry) => _buildCategoryItem(entry.key, entry.value))
@@ -2751,30 +2767,30 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.history, size: 80, color: Colors.grey.shade400),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text('No Payment History',
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey.shade600)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text('Payments you mark as paid will appear here',
                     style: TextStyle(color: Colors.grey.shade500)),
               ],
             ),
           )
         : ListView.builder(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             itemCount: paymentHistory.length,
             itemBuilder: (context, index) {
               final payment = paymentHistory[index];
               return Card(
-                margin: EdgeInsets.only(bottom: 15),
+                margin: const EdgeInsets.only(bottom: 15),
                 elevation: 3,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
                 child: ListTile(
-                  contentPadding: EdgeInsets.all(15),
+                  contentPadding: const EdgeInsets.all(15),
                   leading: CircleAvatar(
                     backgroundColor: _getCategoryColor(payment.category),
                     child: Icon(
@@ -2783,7 +2799,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                     ),
                   ),
                   title: Text(payment.name,
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -2799,11 +2815,11 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text('₹${payment.amount.toStringAsFixed(2)}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                               color: Colors.green)),
-                      Icon(Icons.check_circle, color: Colors.green),
+                      const Icon(Icons.check_circle, color: Colors.green),
                     ],
                   ),
                 ),
@@ -2818,17 +2834,17 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
     final insights = _generateSmartInsights();
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Spending Trends',
+          const Text('Spending Trends',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Weekly trend with real data
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
@@ -2836,7 +2852,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.1),
                     blurRadius: 10,
-                    offset: Offset(0, 5))
+                    offset: const Offset(0, 5))
               ],
             ),
             child: Column(
@@ -2844,24 +2860,24 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Last 7 Days',
+                    const Text('Last 7 Days',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16)),
                     Text('Total: ₹${weeklyData['total'].toStringAsFixed(2)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold)),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ..._buildRealWeeklyChart(weeklyData['daily']),
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Monthly trend
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
@@ -2869,67 +2885,67 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.1),
                     blurRadius: 10,
-                    offset: Offset(0, 5))
+                    offset: const Offset(0, 5))
               ],
             ),
             child: Column(
               children: [
-                Text('Monthly Trend',
+                const Text('Monthly Trend',
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 ..._buildMonthlyTrendChart(monthlyTrend),
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Peak spending analysis
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.orange.shade50,
               borderRadius: BorderRadius.circular(15),
             ),
             child: Column(
               children: [
-                Icon(Icons.trending_up, color: Colors.orange, size: 30),
-                SizedBox(height: 10),
-                Text('Peak Spending Analysis',
+                const Icon(Icons.trending_up, color: Colors.orange, size: 30),
+                const SizedBox(height: 10),
+                const Text('Peak Spending Analysis',
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(insights['peakDay'],
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.orange.shade700)),
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Smart insights with real data
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.blue.shade50,
               borderRadius: BorderRadius.circular(15),
             ),
             child: Column(
               children: [
-                Icon(Icons.lightbulb, color: Colors.blue, size: 30),
-                SizedBox(height: 10),
-                Text('Smart Insights',
+                const Icon(Icons.lightbulb, color: Colors.blue, size: 30),
+                const SizedBox(height: 10),
+                const Text('Smart Insights',
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ...insights['tips']
                     .map<Widget>((tip) => Padding(
-                          padding: EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.only(bottom: 8),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.circle, color: Colors.blue, size: 6),
-                              SizedBox(width: 10),
+                              const Icon(Icons.circle, color: Colors.blue, size: 6),
+                              const SizedBox(width: 10),
                               Expanded(
                                 child: Text(tip,
                                     style:
@@ -2956,7 +2972,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
     for (int i = 6; i >= 0; i--) {
       final date = now.subtract(Duration(days: i));
       final dayStart = DateTime(date.year, date.month, date.day);
-      final dayEnd = dayStart.add(Duration(days: 1));
+      final dayEnd = dayStart.add(const Duration(days: 1));
 
       double dayTotal = expenses
           .where((expense) =>
@@ -3114,7 +3130,7 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
   Widget _buildStatCard(
       String title, String value, IconData icon, Color color) {
     return Container(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -3122,16 +3138,16 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
           BoxShadow(
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 10,
-              offset: Offset(0, 5))
+              offset: const Offset(0, 5))
         ],
       ),
       child: Column(
         children: [
           Icon(icon, color: color, size: 30),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(title,
               style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(value,
               style: TextStyle(
                   fontSize: 20, fontWeight: FontWeight.bold, color: color)),
@@ -3142,8 +3158,8 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
 
   Widget _buildCategoryItem(String category, double amount) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.all(15),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -3151,16 +3167,16 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
           BoxShadow(
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 5,
-              offset: Offset(0, 2))
+              offset: const Offset(0, 2))
         ],
       ),
       child: Row(
         children: [
           Icon(_getCategoryIcon(category), color: _getCategoryColor(category)),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           Expanded(
             child:
-                Text(category, style: TextStyle(fontWeight: FontWeight.w600)),
+                Text(category, style: const TextStyle(fontWeight: FontWeight.w600)),
           ),
           Text('₹${amount.toStringAsFixed(2)}',
               style: TextStyle(
@@ -3175,11 +3191,11 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
     if (dailyData.isEmpty) {
       return [
         Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
               Icon(Icons.bar_chart, size: 50, color: Colors.grey.shade400),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text('No data available for the last 7 days',
                   style: TextStyle(color: Colors.grey.shade600)),
               Text('Start tracking expenses to see trends',
@@ -3210,12 +3226,12 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
       double heightPercentage = (amount / maxAmount);
 
       return Padding(
-        padding: EdgeInsets.symmetric(vertical: 5),
+        padding: const EdgeInsets.symmetric(vertical: 5),
         child: Row(
           children: [
             SizedBox(
-                width: 30, child: Text(day, style: TextStyle(fontSize: 12))),
-            SizedBox(width: 10),
+                width: 30, child: Text(day, style: const TextStyle(fontSize: 12))),
+            const SizedBox(width: 10),
             Expanded(
               child: Container(
                 height: 25,
@@ -3239,11 +3255,11 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             SizedBox(
               width: 60,
               child: Text('₹${amount.toStringAsFixed(0)}',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.right),
             ),
           ],
@@ -3256,11 +3272,11 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
     if (monthlyData.isEmpty) {
       return [
         Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
               Icon(Icons.trending_up, size: 50, color: Colors.grey.shade400),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text('No monthly data available',
                   style: TextStyle(color: Colors.grey.shade600)),
             ],
@@ -3282,12 +3298,12 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
       double heightPercentage = (amount / maxAmount);
 
       return Padding(
-        padding: EdgeInsets.symmetric(vertical: 5),
+        padding: const EdgeInsets.symmetric(vertical: 5),
         child: Row(
           children: [
             SizedBox(
-                width: 35, child: Text(month, style: TextStyle(fontSize: 12))),
-            SizedBox(width: 10),
+                width: 35, child: Text(month, style: const TextStyle(fontSize: 12))),
+            const SizedBox(width: 10),
             Expanded(
               child: Container(
                 height: 25,
@@ -3311,11 +3327,11 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             SizedBox(
               width: 70,
               child: Text('₹${amount.toStringAsFixed(0)}',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.right),
             ),
           ],
@@ -3369,6 +3385,8 @@ ${reminders.map((r) => '${r.name} - ₹${r.amount.toStringAsFixed(2)} - Due: ${r
 
 // Profile Screen
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -3407,22 +3425,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Edit Profile'),
+        title: const Text('Edit Profile'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Display Name',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.person),
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             TextField(
               controller: emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.email),
@@ -3434,7 +3452,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -3445,11 +3463,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 });
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Profile updated successfully!')),
+                  const SnackBar(content: Text('Profile updated successfully!')),
                 );
               }
             },
-            child: Text('Save'),
+            child: const Text('Save'),
           ),
         ],
       ),
@@ -3460,29 +3478,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('About PayTrack Premium'),
+        title: const Text('About PayTrack Premium'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('PayTrack Premium v1.0.0'),
-            SizedBox(height: 5),
+            const Text('PayTrack Premium v1.0.0'),
+            const SizedBox(height: 5),
             Text('Build by Anil and Team',
                 style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
                 'A complete payment reminder and spending tracker app built with Flutter.'),
-            SizedBox(height: 10),
-            Text('Features:'),
-            Text('• Payment Reminders'),
-            Text('• Spending Tracking'),
-            Text('• Budget Limits'),
-            Text('• Analytics & Reports'),
+            const SizedBox(height: 10),
+            const Text('Features:'),
+            const Text('• Payment Reminders'),
+            const Text('• Spending Tracking'),
+            const Text('• Budget Limits'),
+            const Text('• Analytics & Reports'),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
       ),
@@ -3514,7 +3532,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // Calculate payment streak (count of reminders in last 30 days)
     final recentReminders = reminders
         .where((reminder) =>
-            reminder.dueDate.isAfter(now.subtract(Duration(days: 30))))
+            reminder.dueDate.isAfter(now.subtract(const Duration(days: 30))))
         .length;
 
     return {
@@ -3529,7 +3547,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildAnalyticsCard(
       String title, String value, IconData icon, Color color) {
     return Container(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
@@ -3541,7 +3559,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Row(
             children: [
               Icon(icon, color: color, size: 20),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   title,
@@ -3554,7 +3572,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             value,
             style: TextStyle(
@@ -3575,16 +3593,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Profile',
+        title: const Text('Profile',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             // Profile Header
             Container(
-              padding: EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.blue.shade600, Colors.blue.shade800],
@@ -3596,7 +3614,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   BoxShadow(
                       color: Colors.blue.withOpacity(0.3),
                       blurRadius: 20,
-                      offset: Offset(0, 10))
+                      offset: const Offset(0, 10))
                 ],
               ),
               child: Column(
@@ -3623,63 +3641,63 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         bottom: 0,
                         right: 0,
                         child: Container(
-                          padding: EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             color: Colors.green,
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white, width: 2),
                           ),
-                          child: Icon(Icons.verified,
+                          child: const Icon(Icons.verified,
                               color: Colors.white, size: 16),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(userEmail.split('@')[0].toUpperCase(),
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.white)),
                   Text(userEmail,
                       style: TextStyle(
                           color: Colors.white.withOpacity(0.8), fontSize: 16)),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: Text('Premium Member',
+                    child: const Text('Premium Member',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
                             fontWeight: FontWeight.w600)),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       Expanded(
                         child: ElevatedButton.icon(
                           onPressed: _editProfile,
-                          icon: Icon(Icons.edit, size: 18),
-                          label: Text('Edit Profile'),
+                          icon: const Icon(Icons.edit, size: 18),
+                          label: const Text('Edit Profile'),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             foregroundColor: Colors.blue.shade700,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
-                            padding: EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       ElevatedButton(
                         onPressed: () {
                           // Share profile or app
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 content: Text('Profile shared successfully!')),
                           );
                         },
@@ -3688,16 +3706,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
-                          padding: EdgeInsets.all(12),
+                          padding: const EdgeInsets.all(12),
                         ),
-                        child: Icon(Icons.share, size: 20),
+                        child: const Icon(Icons.share, size: 20),
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Analytics Section
             Container(
@@ -3708,12 +3726,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
                       blurRadius: 15,
-                      offset: Offset(0, 5))
+                      offset: const Offset(0, 5))
                 ],
               ),
               child: Column(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.fromLTRB(20, 20, 20, 15),
                     child: Row(
                       children: [
@@ -3731,15 +3749,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     future: _getAnalytics(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Container(
+                        return SizedBox(
                           height: 200,
-                          child: Center(child: CircularProgressIndicator()),
+                          child: const Center(child: CircularProgressIndicator()),
                         );
                       }
 
                       final analytics = snapshot.data ?? {};
                       return Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                         child: Column(
                           children: [
                             Row(
@@ -3752,7 +3770,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     Colors.blue,
                                   ),
                                 ),
-                                SizedBox(width: 15),
+                                const SizedBox(width: 15),
                                 Expanded(
                                   child: _buildAnalyticsCard(
                                     'Active Reminders',
@@ -3763,7 +3781,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 15),
+                            const SizedBox(height: 15),
                             Row(
                               children: [
                                 Expanded(
@@ -3774,7 +3792,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     Colors.orange,
                                   ),
                                 ),
-                                SizedBox(width: 15),
+                                const SizedBox(width: 15),
                                 Expanded(
                                   child: _buildAnalyticsCard(
                                     'High Priority',
@@ -3785,17 +3803,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 15),
+                            const SizedBox(height: 15),
                             Container(
-                              padding: EdgeInsets.all(15),
+                              padding: const EdgeInsets.all(15),
                               decoration: BoxDecoration(
                                 color: Colors.blue.shade50,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Row(
                                 children: [
-                                  Icon(Icons.trending_up, color: Colors.blue),
-                                  SizedBox(width: 10),
+                                  const Icon(Icons.trending_up, color: Colors.blue),
+                                  const SizedBox(width: 10),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:
@@ -3824,7 +3842,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Settings Options
             Container(
@@ -3835,7 +3853,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
                       blurRadius: 15,
-                      offset: Offset(0, 5))
+                      offset: const Offset(0, 5))
                 ],
               ),
               child: Column(
@@ -3847,7 +3865,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           builder: (context) => NotificationSettingsScreen()),
                     );
                   }),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   _buildSettingItem(Icons.security, 'Security', () {
                     Navigator.push(
                       context,
@@ -3855,7 +3873,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           builder: (context) => SecuritySettingsScreen()),
                     );
                   }),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   _buildSettingItem(Icons.help, 'Help & Support', () {
                     Navigator.push(
                       context,
@@ -3863,40 +3881,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           builder: (context) => HelpSupportScreen()),
                     );
                   }),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   _buildSettingItem(Icons.info, 'About', _showAbout),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   _buildSettingItem(Icons.logout, 'Logout', _logout,
                       isLogout: true),
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // App Info
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.blue.shade50,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
                 children: [
-                  Text('PayTrack Premium',
+                  const Text('PayTrack Premium',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text('Version 1.0.0',
                       style: TextStyle(color: Colors.grey.shade600)),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Text('Thank you for using PayTrack Premium!',
                       style: TextStyle(color: Colors.grey.shade600),
                       textAlign: TextAlign.center),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                     decoration: BoxDecoration(
                       color: Colors.blue.shade100,
                       borderRadius: BorderRadius.circular(12),
@@ -4018,7 +4036,7 @@ class AddReminderDialog extends StatefulWidget {
   final PaymentReminder? reminder;
   final Function(PaymentReminder) onAdd;
 
-  AddReminderDialog({this.reminder, required this.onAdd});
+  const AddReminderDialog({super.key, this.reminder, required this.onAdd});
 
   @override
   _AddReminderDialogState createState() => _AddReminderDialogState();
@@ -4029,10 +4047,10 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
   final _amountController = TextEditingController();
   final _notesController = TextEditingController();
   String _selectedCategory = 'Bills';
-  DateTime _selectedDate = DateTime.now().add(Duration(days: 30));
+  DateTime _selectedDate = DateTime.now().add(const Duration(days: 30));
   bool _isRecurring = false;
   String _repeatInterval = 'monthly';
-  TimeOfDay _reminderTime = TimeOfDay(hour: 9, minute: 0);
+  TimeOfDay _reminderTime = const TimeOfDay(hour: 9, minute: 0);
   List<int> _reminderDaysBefore = [1, 3];
   String _priority = 'medium';
 
@@ -4065,18 +4083,18 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Payment Name'),
+              decoration: const InputDecoration(labelText: 'Payment Name'),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             TextField(
               controller: _amountController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Amount (₹)'),
+              decoration: const InputDecoration(labelText: 'Amount (₹)'),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             DropdownButtonFormField<String>(
               value: _selectedCategory,
-              decoration: InputDecoration(labelText: 'Category'),
+              decoration: const InputDecoration(labelText: 'Category'),
               items: [
                 'Bills',
                 'Utilities',
@@ -4090,17 +4108,17 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
                   .toList(),
               onChanged: (value) => setState(() => _selectedCategory = value!),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Row(
               children: [
-                Text('Due Date: '),
+                const Text('Due Date: '),
                 TextButton(
                   onPressed: () async {
                     final date = await showDatePicker(
                       context: context,
                       initialDate: _selectedDate,
                       firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(Duration(days: 365)),
+                      lastDate: DateTime.now().add(const Duration(days: 365)),
                     );
                     if (date != null) {
                       setState(() => _selectedDate = date);
@@ -4111,34 +4129,34 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
                 ),
               ],
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Row(
               children: [
                 Checkbox(
                   value: _isRecurring,
                   onChanged: (value) => setState(() => _isRecurring = value!),
                 ),
-                Text('Recurring Payment'),
+                const Text('Recurring Payment'),
               ],
             ),
             if (_isRecurring) ...[
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               DropdownButtonFormField<String>(
                 value: _repeatInterval,
-                decoration: InputDecoration(labelText: 'Repeat Every'),
+                decoration: const InputDecoration(labelText: 'Repeat Every'),
                 items: [
-                  DropdownMenuItem(value: 'weekly', child: Text('Weekly')),
-                  DropdownMenuItem(value: 'monthly', child: Text('Monthly')),
-                  DropdownMenuItem(value: 'yearly', child: Text('Yearly')),
+                  const DropdownMenuItem(value: 'weekly', child: Text('Weekly')),
+                  const DropdownMenuItem(value: 'monthly', child: Text('Monthly')),
+                  const DropdownMenuItem(value: 'yearly', child: Text('Yearly')),
                 ].toList(),
                 onChanged: (value) => setState(() => _repeatInterval = value!),
               ),
             ],
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             // Notification Time Section
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: Colors.blue.shade50,
                 borderRadius: BorderRadius.circular(10),
@@ -4149,22 +4167,22 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.notifications, color: Colors.blue, size: 20),
-                      SizedBox(width: 8),
+                      const Icon(Icons.notifications, color: Colors.blue, size: 20),
+                      const SizedBox(width: 8),
                       Text('Notification Settings',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.blue.shade700)),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
-                      Text('Reminder Time: '),
+                      const Text('Reminder Time: '),
                       Expanded(
                         child: Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8),
@@ -4186,8 +4204,8 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
                               children: [
                                 Text(_reminderTime.format(context),
                                     style:
-                                        TextStyle(fontWeight: FontWeight.w600)),
-                                Icon(Icons.access_time,
+                                        const TextStyle(fontWeight: FontWeight.w600)),
+                                const Icon(Icons.access_time,
                                     color: Colors.blue, size: 18),
                               ],
                             ),
@@ -4196,43 +4214,43 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text('Quick Options:',
                       style:
                           TextStyle(fontSize: 12, color: Colors.grey.shade600)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Wrap(
                     spacing: 8,
                     children: [
-                      _buildTimeChip('Morning', TimeOfDay(hour: 9, minute: 0)),
+                      _buildTimeChip('Morning', const TimeOfDay(hour: 9, minute: 0)),
                       _buildTimeChip(
-                          'Afternoon', TimeOfDay(hour: 14, minute: 0)),
-                      _buildTimeChip('Evening', TimeOfDay(hour: 18, minute: 0)),
-                      _buildTimeChip('Night', TimeOfDay(hour: 21, minute: 0)),
+                          'Afternoon', const TimeOfDay(hour: 14, minute: 0)),
+                      _buildTimeChip('Evening', const TimeOfDay(hour: 18, minute: 0)),
+                      _buildTimeChip('Night', const TimeOfDay(hour: 21, minute: 0)),
                     ],
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             // Priority
             DropdownButtonFormField<String>(
               value: _priority,
-              decoration: InputDecoration(labelText: 'Priority'),
+              decoration: const InputDecoration(labelText: 'Priority'),
               items: [
-                DropdownMenuItem(value: 'low', child: Text('Low')),
-                DropdownMenuItem(value: 'medium', child: Text('Medium')),
-                DropdownMenuItem(value: 'high', child: Text('High')),
+                const DropdownMenuItem(value: 'low', child: Text('Low')),
+                const DropdownMenuItem(value: 'medium', child: Text('Medium')),
+                const DropdownMenuItem(value: 'high', child: Text('High')),
               ].toList(),
               onChanged: (value) => setState(() => _priority = value!),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             // Days Before Reminder
-            Text('Remind me before:',
+            const Text('Remind me before:',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Wrap(
               spacing: 10,
               children: [1, 2, 3, 5, 7].map((days) {
@@ -4252,12 +4270,12 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
                 );
               }).toList(),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             // Notes
             TextField(
               controller: _notesController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Notes (optional)',
                 hintText: 'Add any additional notes...',
               ),
@@ -4269,7 +4287,7 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         ElevatedButton(
           onPressed: () {
@@ -4308,7 +4326,7 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
         });
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: isSelected ? Colors.blue : Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -4325,7 +4343,7 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
               size: 14,
               color: isSelected ? Colors.white : Colors.blue,
             ),
-            SizedBox(width: 4),
+            const SizedBox(width: 4),
             Text(
               label,
               style: TextStyle(
@@ -4344,7 +4362,7 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
 class AddExpenseDialog extends StatefulWidget {
   final Function(SpendingEntry) onAdd;
 
-  AddExpenseDialog({required this.onAdd});
+  const AddExpenseDialog({super.key, required this.onAdd});
 
   @override
   _AddExpenseDialogState createState() => _AddExpenseDialogState();
@@ -4358,24 +4376,24 @@ class _AddExpenseDialogState extends State<AddExpenseDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Add Expense'),
+      title: const Text('Add Expense'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             controller: _nameController,
-            decoration: InputDecoration(labelText: 'Expense Name'),
+            decoration: const InputDecoration(labelText: 'Expense Name'),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           TextField(
             controller: _amountController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Amount (₹)'),
+            decoration: const InputDecoration(labelText: 'Amount (₹)'),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           DropdownButtonFormField<String>(
             value: _selectedCategory,
-            decoration: InputDecoration(labelText: 'Category'),
+            decoration: const InputDecoration(labelText: 'Category'),
             items: ['Food', 'Transport', 'Shopping', 'Entertainment', 'Other']
                 .map((category) =>
                     DropdownMenuItem(value: category, child: Text(category)))
@@ -4387,7 +4405,7 @@ class _AddExpenseDialogState extends State<AddExpenseDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         ElevatedButton(
           onPressed: () {
@@ -4403,7 +4421,7 @@ class _AddExpenseDialogState extends State<AddExpenseDialog> {
               Navigator.pop(context);
             }
           },
-          child: Text('Add'),
+          child: const Text('Add'),
         ),
       ],
     );
@@ -4415,7 +4433,7 @@ class SetLimitsDialog extends StatefulWidget {
   final double currentDailyLimit;
   final double currentMonthlyLimit;
 
-  SetLimitsDialog({
+  const SetLimitsDialog({super.key, 
     required this.currentDailyLimit,
     required this.currentMonthlyLimit,
   });
@@ -4440,23 +4458,23 @@ class _SetLimitsDialogState extends State<SetLimitsDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Set Spending Limits'),
+      title: const Text('Set Spending Limits'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             controller: _dailyController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Daily Limit (₹)',
               prefixIcon: Icon(Icons.today),
             ),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           TextField(
             controller: _monthlyController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Monthly Limit (₹)',
               prefixIcon: Icon(Icons.calendar_month),
             ),
@@ -4466,7 +4484,7 @@ class _SetLimitsDialogState extends State<SetLimitsDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         ElevatedButton(
           onPressed: () {
@@ -4480,7 +4498,7 @@ class _SetLimitsDialogState extends State<SetLimitsDialog> {
               'monthly': monthlyLimit,
             });
           },
-          child: Text('Save'),
+          child: const Text('Save'),
         ),
       ],
     );
@@ -4491,7 +4509,7 @@ class _SetLimitsDialogState extends State<SetLimitsDialog> {
 class AddReminderScreen extends StatefulWidget {
   final PaymentReminder? reminder;
 
-  const AddReminderScreen({Key? key, this.reminder}) : super(key: key);
+  const AddReminderScreen({super.key, this.reminder});
 
   @override
   _AddReminderScreenState createState() => _AddReminderScreenState();
@@ -4501,42 +4519,42 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
   final _nameController = TextEditingController();
   final _amountController = TextEditingController();
   String _selectedCategory = 'Bills';
-  DateTime _selectedDate = DateTime.now().add(Duration(days: 30));
+  DateTime _selectedDate = DateTime.now().add(const Duration(days: 30));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Payment Reminder'),
+        title: const Text('Add Payment Reminder'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Payment Name',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.payment),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               controller: _amountController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Amount (₹)',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.currency_rupee),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             DropdownButtonFormField<String>(
               value: _selectedCategory,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Category',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.category),
@@ -4554,21 +4572,21 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
                   .toList(),
               onChanged: (value) => setState(() => _selectedCategory = value!),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             InkWell(
               onTap: () async {
                 final date = await showDatePicker(
                   context: context,
                   initialDate: _selectedDate,
                   firstDate: DateTime.now(),
-                  lastDate: DateTime.now().add(Duration(days: 365)),
+                  lastDate: DateTime.now().add(const Duration(days: 365)),
                 );
                 if (date != null) {
                   setState(() => _selectedDate = date);
                 }
               },
               child: InputDecorator(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Due Date',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.calendar_today),
@@ -4578,8 +4596,8 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 30),
-            Container(
+            const SizedBox(height: 30),
+            SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
@@ -4594,7 +4612,7 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
 
                     if (selectedDay.isBefore(today)) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text(
                               'Cannot set reminder for past dates. Please select a future date.'),
                           backgroundColor: Colors.red,
@@ -4604,7 +4622,7 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
                     }
 
                     // Default reminder settings
-                    final defaultReminderTime = TimeOfDay(hour: 9, minute: 0);
+                    const defaultReminderTime = TimeOfDay(hour: 9, minute: 0);
                     final defaultReminderDays = [1, 3];
 
                     // Validate reminder time logic
@@ -4626,7 +4644,7 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
 
                     if (!hasValidReminders) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text(
                               'All reminder times would be in the past. Please adjust the due date.'),
                           backgroundColor: Colors.orange,
@@ -4660,7 +4678,7 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
                     Navigator.pop(context, true);
 
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                           content: Text(
                               'Payment reminder added with notifications scheduled!')),
                     );
@@ -4669,7 +4687,7 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                 ),
-                child: Text('Add Reminder',
+                child: const Text('Add Reminder',
                     style: TextStyle(fontSize: 18, color: Colors.white)),
               ),
             ),
@@ -4682,6 +4700,8 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
 
 // Settings Screens
 class NotificationSettingsScreen extends StatefulWidget {
+  const NotificationSettingsScreen({super.key});
+
   @override
   _NotificationSettingsScreenState createState() =>
       _NotificationSettingsScreenState();
@@ -4703,18 +4723,18 @@ class _NotificationSettingsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notification Settings'),
+        title: const Text('Notification Settings'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: ListView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         children: [
           // Basic Notifications
           Card(
             child: Column(
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(16),
                   child: Row(
                     children: [
@@ -4727,36 +4747,36 @@ class _NotificationSettingsScreenState
                   ),
                 ),
                 SwitchListTile(
-                  title: Text('Payment Reminders'),
-                  subtitle: Text('Get notified about upcoming payments'),
+                  title: const Text('Payment Reminders'),
+                  subtitle: const Text('Get notified about upcoming payments'),
                   value: _reminderNotifications,
                   onChanged: (value) =>
                       setState(() => _reminderNotifications = value),
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
                 SwitchListTile(
-                  title: Text('Payment Alerts'),
-                  subtitle: Text('Alerts for overdue payments'),
+                  title: const Text('Payment Alerts'),
+                  subtitle: const Text('Alerts for overdue payments'),
                   value: _paymentAlerts,
                   onChanged: (value) => setState(() => _paymentAlerts = value),
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
                 SwitchListTile(
-                  title: Text('Weekly Reports'),
-                  subtitle: Text('Weekly spending summaries'),
+                  title: const Text('Weekly Reports'),
+                  subtitle: const Text('Weekly spending summaries'),
                   value: _weeklyReports,
                   onChanged: (value) => setState(() => _weeklyReports = value),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Advanced Notifications
           Card(
             child: Column(
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(16),
                   child: Row(
                     children: [
@@ -4769,24 +4789,24 @@ class _NotificationSettingsScreenState
                   ),
                 ),
                 SwitchListTile(
-                  title: Text('Priority Notifications'),
-                  subtitle: Text('Special alerts for high priority payments'),
+                  title: const Text('Priority Notifications'),
+                  subtitle: const Text('Special alerts for high priority payments'),
                   value: _priorityNotifications,
                   onChanged: (value) =>
                       setState(() => _priorityNotifications = value),
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
                 SwitchListTile(
-                  title: Text('Overdue Notifications'),
-                  subtitle: Text('Daily reminders for overdue payments'),
+                  title: const Text('Overdue Notifications'),
+                  subtitle: const Text('Daily reminders for overdue payments'),
                   value: _overdueNotifications,
                   onChanged: (value) =>
                       setState(() => _overdueNotifications = value),
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
                 SwitchListTile(
-                  title: Text('Smart Notifications'),
-                  subtitle: Text('AI-powered notification timing'),
+                  title: const Text('Smart Notifications'),
+                  subtitle: const Text('AI-powered notification timing'),
                   value: _smartNotifications,
                   onChanged: (value) =>
                       setState(() => _smartNotifications = value),
@@ -4794,13 +4814,13 @@ class _NotificationSettingsScreenState
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Notification Timing
           Card(
             child: Column(
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(16),
                   child: Row(
                     children: [
@@ -4813,24 +4833,24 @@ class _NotificationSettingsScreenState
                   ),
                 ),
                 ListTile(
-                  title: Text('Default Notification Time'),
-                  subtitle: Text('Time for daily reminders'),
+                  title: const Text('Default Notification Time'),
+                  subtitle: const Text('Time for daily reminders'),
                   trailing: Text(_notificationTime,
-                      style: TextStyle(color: Colors.blue)),
+                      style: const TextStyle(color: Colors.blue)),
                   onTap: () async {
                     final time = await showTimePicker(
                       context: context,
-                      initialTime: TimeOfDay(hour: 9, minute: 0),
+                      initialTime: const TimeOfDay(hour: 9, minute: 0),
                     );
                     if (time != null) {
                       setState(() => _notificationTime = time.format(context));
                     }
                   },
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
                 ListTile(
-                  title: Text('Advance Notice'),
-                  subtitle: Text('Days before due date to remind'),
+                  title: const Text('Advance Notice'),
+                  subtitle: const Text('Days before due date to remind'),
                   trailing: DropdownButton<int>(
                     value: _reminderDaysBefore,
                     items: [1, 2, 3, 5, 7, 14]
@@ -4844,10 +4864,10 @@ class _NotificationSettingsScreenState
                         setState(() => _reminderDaysBefore = value!),
                   ),
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
                 ListTile(
-                  title: Text('Notification Sound'),
-                  subtitle: Text('Sound for payment reminders'),
+                  title: const Text('Notification Sound'),
+                  subtitle: const Text('Sound for payment reminders'),
                   trailing: DropdownButton<String>(
                     value: _notificationSound,
                     items: ['Default', 'Chime', 'Bell', 'Alert', 'Silent']
@@ -4863,15 +4883,15 @@ class _NotificationSettingsScreenState
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Test Notification
           Card(
             child: ListTile(
-              leading: Icon(Icons.notifications_active, color: Colors.purple),
-              title: Text('Test Notification'),
-              subtitle: Text('Send a test notification with current settings'),
-              trailing: Icon(Icons.send),
+              leading: const Icon(Icons.notifications_active, color: Colors.purple),
+              title: const Text('Test Notification'),
+              subtitle: const Text('Send a test notification with current settings'),
+              trailing: const Icon(Icons.send),
               onTap: () async {
                 final notificationService =
                     NotificationServiceLib.NotificationService();
@@ -4901,21 +4921,21 @@ class _NotificationSettingsScreenState
               },
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           ElevatedButton(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Notification settings saved!')),
+                const SnackBar(content: Text('Notification settings saved!')),
               );
             },
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 15),
+              padding: const EdgeInsets.symmetric(vertical: 15),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            child: Text('Save All Settings'),
+            child: const Text('Save All Settings'),
           ),
         ],
       ),
@@ -4924,6 +4944,8 @@ class _NotificationSettingsScreenState
 }
 
 class SecuritySettingsScreen extends StatefulWidget {
+  const SecuritySettingsScreen({super.key});
+
   @override
   _SecuritySettingsScreenState createState() => _SecuritySettingsScreenState();
 }
@@ -4937,40 +4959,40 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Security Settings'),
+        title: const Text('Security Settings'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: ListView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         children: [
           Card(
             child: Column(
               children: [
                 SwitchListTile(
-                  title: Text('Biometric Authentication'),
-                  subtitle: Text('Use fingerprint or face unlock'),
+                  title: const Text('Biometric Authentication'),
+                  subtitle: const Text('Use fingerprint or face unlock'),
                   value: _biometricAuth,
                   onChanged: (value) => setState(() => _biometricAuth = value),
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
                 SwitchListTile(
-                  title: Text('App Lock'),
-                  subtitle: Text('Require authentication to open app'),
+                  title: const Text('App Lock'),
+                  subtitle: const Text('Require authentication to open app'),
                   value: _appLock,
                   onChanged: (value) => setState(() => _appLock = value),
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
                 ListTile(
-                  title: Text('Lock Timeout'),
-                  subtitle: Text('Auto-lock after inactivity'),
+                  title: const Text('Lock Timeout'),
+                  subtitle: const Text('Auto-lock after inactivity'),
                   trailing:
-                      Text(_lockTimeout, style: TextStyle(color: Colors.blue)),
+                      Text(_lockTimeout, style: const TextStyle(color: Colors.blue)),
                   onTap: () {
                     showDialog(
                       context: context,
                       builder: (context) => SimpleDialog(
-                        title: Text('Lock Timeout'),
+                        title: const Text('Lock Timeout'),
                         children: [
                           '1 minute',
                           '5 minutes',
@@ -4992,14 +5014,14 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Security settings saved!')),
+                const SnackBar(content: Text('Security settings saved!')),
               );
             },
-            child: Text('Save Settings'),
+            child: const Text('Save Settings'),
           ),
         ],
       ),
@@ -5008,67 +5030,69 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
 }
 
 class HelpSupportScreen extends StatelessWidget {
+  const HelpSupportScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Help & Support'),
+        title: const Text('Help & Support'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: ListView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         children: [
           Card(
             child: Column(
               children: [
                 ListTile(
-                  leading: Icon(Icons.help_outline, color: Colors.blue),
-                  title: Text('FAQ'),
-                  subtitle: Text('Frequently asked questions'),
-                  trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                  leading: const Icon(Icons.help_outline, color: Colors.blue),
+                  title: const Text('FAQ'),
+                  subtitle: const Text('Frequently asked questions'),
+                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                   onTap: () {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text('FAQ'),
-                        content: Text(
+                        title: const Text('FAQ'),
+                        content: const Text(
                             'How do I set up recurring payments?\n\nWhen adding a payment reminder, check the "Recurring Payment" option and select your preferred interval.'),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: Text('OK'),
+                            child: const Text('OK'),
                           ),
                         ],
                       ),
                     );
                   },
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
                 ListTile(
-                  leading: Icon(Icons.email, color: Colors.blue),
-                  title: Text('Contact Support'),
-                  subtitle: Text('Get help from our team'),
-                  trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                  leading: const Icon(Icons.email, color: Colors.blue),
+                  title: const Text('Contact Support'),
+                  subtitle: const Text('Get help from our team'),
+                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                           content: Text('Support email: support@paytrack.com')),
                     );
                   },
                 ),
-                Divider(height: 1),
+                const Divider(height: 1),
                 ListTile(
-                  leading: Icon(Icons.feedback, color: Colors.blue),
-                  title: Text('Send Feedback'),
-                  subtitle: Text('Help us improve the app'),
-                  trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                  leading: const Icon(Icons.feedback, color: Colors.blue),
+                  title: const Text('Send Feedback'),
+                  subtitle: const Text('Help us improve the app'),
+                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                   onTap: () {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text('Send Feedback'),
-                        content: TextField(
+                        title: const Text('Send Feedback'),
+                        content: const TextField(
                           maxLines: 3,
                           decoration: InputDecoration(
                             hintText: 'Your feedback...',
@@ -5078,17 +5102,17 @@ class HelpSupportScreen extends StatelessWidget {
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: Text('Cancel'),
+                            child: const Text('Cancel'),
                           ),
                           ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                const SnackBar(
                                     content: Text('Feedback sent! Thank you.')),
                               );
                             },
-                            child: Text('Send'),
+                            child: const Text('Send'),
                           ),
                         ],
                       ),
@@ -5098,19 +5122,19 @@ class HelpSupportScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Card(
             child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  Icon(Icons.support_agent, size: 64, color: Colors.blue),
-                  SizedBox(height: 15),
-                  Text(
+                  const Icon(Icons.support_agent, size: 64, color: Colors.blue),
+                  const SizedBox(height: 15),
+                  const Text(
                     'Need More Help?',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     'Our support team is here to help you 24/7. Feel free to reach out for any assistance.',
                     textAlign: TextAlign.center,

@@ -310,7 +310,7 @@ class _StatsScreenState extends State<StatsScreen> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.check_circle, color: Colors.white, size: 20),
+                    const Icon(Icons.check_circle, color: Colors.white, size: 20),
                     const SizedBox(width: 8),
                     Text(
                       'Paid',
@@ -364,7 +364,7 @@ class _StatsScreenState extends State<StatsScreen> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.pending, color: Colors.white, size: 20),
+                    const Icon(Icons.pending, color: Colors.white, size: 20),
                     const SizedBox(width: 8),
                     Text(
                       'Pending',

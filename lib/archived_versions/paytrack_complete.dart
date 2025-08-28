@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 void main() => runApp(PayTrackApp());
 
 class PayTrackApp extends StatelessWidget {
+  const PayTrackApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,37 +16,39 @@ class PayTrackApp extends StatelessWidget {
 }
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  List<Payment> _payments = [
+  final List<Payment> _payments = [
     Payment(
       'Electricity Bill',
       89.50,
-      DateTime.now().add(Duration(days: 1)),
+      DateTime.now().add(const Duration(days: 1)),
       'Utilities',
     ),
     Payment('Internet Bill', 45.00, DateTime.now(), 'Internet'),
     Payment(
       'Water Bill',
       32.75,
-      DateTime.now().add(Duration(days: 7)),
+      DateTime.now().add(const Duration(days: 7)),
       'Utilities',
     ),
     Payment(
       'Phone Bill',
       25.00,
-      DateTime.now().add(Duration(days: 3)),
+      DateTime.now().add(const Duration(days: 3)),
       'Phone',
     ),
-    Payment('Rent', 850.00, DateTime.now().add(Duration(days: 28)), 'Housing'),
+    Payment('Rent', 850.00, DateTime.now().add(const Duration(days: 28)), 'Housing'),
     Payment(
       'Insurance',
       120.00,
-      DateTime.now().add(Duration(days: 15)),
+      DateTime.now().add(const Duration(days: 15)),
       'Insurance',
     ),
   ];
@@ -53,7 +57,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PayTrack'),
+        title: const Text('PayTrack'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         elevation: 0,
@@ -65,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.dashboard),
             label: 'Dashboard',
@@ -81,8 +85,8 @@ class _MainScreenState extends State<MainScreen> {
       floatingActionButton: _currentIndex == 1
           ? FloatingActionButton(
               onPressed: () => _showAddPaymentDialog(),
-              child: Icon(Icons.add),
               backgroundColor: Colors.blue,
+              child: Icon(Icons.add),
             )
           : null,
     );
@@ -117,15 +121,15 @@ class _MainScreenState extends State<MainScreen> {
     }).length;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Dashboard',
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Summary Cards
           Row(
@@ -139,7 +143,7 @@ class _MainScreenState extends State<MainScreen> {
                   Colors.red,
                 ),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: _buildSummaryCard(
                   'Overdue',
@@ -151,7 +155,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ],
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
 
           Row(
             children: [
@@ -164,7 +168,7 @@ class _MainScreenState extends State<MainScreen> {
                   Colors.blue,
                 ),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: _buildSummaryCard(
                   'Total Bills',
@@ -177,23 +181,23 @@ class _MainScreenState extends State<MainScreen> {
             ],
           ),
 
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // Recent Payments
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Recent Payments',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               TextButton(
                 onPressed: () => setState(() => _currentIndex = 1),
-                child: Text('View All'),
+                child: const Text('View All'),
               ),
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           Container(
             decoration: BoxDecoration(
@@ -202,9 +206,9 @@ class _MainScreenState extends State<MainScreen> {
             ),
             child: ListView.separated(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: _payments.take(3).length,
-              separatorBuilder: (context, index) => Divider(height: 1),
+              separatorBuilder: (context, index) => const Divider(height: 1),
               itemBuilder: (context, index) {
                 final payment = _payments[index];
                 return _buildPaymentListItem(payment, false);
@@ -212,14 +216,14 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
 
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // Quick Actions
-          Text(
+          const Text(
             'Quick Actions',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           Row(
             children: [
@@ -231,7 +235,7 @@ class _MainScreenState extends State<MainScreen> {
                   () => _showAddPaymentDialog(),
                 ),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: _buildActionCard(
                   'View Calendar',
@@ -251,29 +255,29 @@ class _MainScreenState extends State<MainScreen> {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'All Payments',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               IconButton(
                 onPressed: () => _showAddPaymentDialog(),
-                icon: Icon(Icons.add),
+                icon: const Icon(Icons.add),
               ),
             ],
           ),
         ),
         Expanded(
           child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             itemCount: _payments.length,
             itemBuilder: (context, index) {
               final payment = _payments[index];
               return Card(
-                margin: EdgeInsets.only(bottom: 8),
+                margin: const EdgeInsets.only(bottom: 8),
                 child: _buildPaymentListItem(payment, true),
               );
             },
@@ -285,35 +289,35 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _buildCalendar() {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          Text(
+          const Text(
             'Payment Calendar',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // Monthly View
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.blue.shade50,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
               children: [
-                Text(
+                const Text(
                   'This Month\'s Payments',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
 
                 // Calendar grid would go here
                 GridView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 7,
                     childAspectRatio: 1,
                   ),
@@ -325,7 +329,7 @@ class _MainScreenState extends State<MainScreen> {
                     );
 
                     return Container(
-                      margin: EdgeInsets.all(2),
+                      margin: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
                         color: hasPayment
                             ? Colors.red.shade100
@@ -350,33 +354,33 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
 
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // Upcoming this week
-          Text(
+          const Text(
             'This Week',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           Expanded(
             child: ListView.builder(
               itemCount: _payments.where((p) {
                 final now = DateTime.now();
-                final weekFromNow = now.add(Duration(days: 7));
+                final weekFromNow = now.add(const Duration(days: 7));
                 return p.dueDate.isAfter(now) &&
                     p.dueDate.isBefore(weekFromNow);
               }).length,
               itemBuilder: (context, index) {
                 final weekPayments = _payments.where((p) {
                   final now = DateTime.now();
-                  final weekFromNow = now.add(Duration(days: 7));
+                  final weekFromNow = now.add(const Duration(days: 7));
                   return p.dueDate.isAfter(now) &&
                       p.dueDate.isBefore(weekFromNow);
                 }).toList();
 
                 if (weekPayments.isEmpty) {
-                  return Center(child: Text('No payments this week!'));
+                  return const Center(child: Text('No payments this week!'));
                 }
 
                 final payment = weekPayments[index];
@@ -391,17 +395,17 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _buildProfile() {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          SizedBox(height: 40),
-          CircleAvatar(
+          const SizedBox(height: 40),
+          const CircleAvatar(
             radius: 60,
             backgroundColor: Colors.blue,
             child: Icon(Icons.person, size: 60, color: Colors.white),
           ),
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'John Doe',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
@@ -409,27 +413,27 @@ class _MainScreenState extends State<MainScreen> {
             'john.doe@example.com',
             style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
 
           Card(
             child: Column(
               children: [
                 _buildProfileOption(Icons.notifications, 'Notifications', true),
-                Divider(height: 1),
+                const Divider(height: 1),
                 _buildProfileOption(Icons.security, 'Security', false),
-                Divider(height: 1),
+                const Divider(height: 1),
                 _buildProfileOption(Icons.help, 'Help & Support', false),
-                Divider(height: 1),
+                const Divider(height: 1),
                 _buildProfileOption(Icons.info, 'About PayTrack', false),
               ],
             ),
           ),
 
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // Statistics
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.blue.shade50,
@@ -437,11 +441,11 @@ class _MainScreenState extends State<MainScreen> {
             ),
             child: Column(
               children: [
-                Text(
+                const Text(
                   'Your Stats',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -472,7 +476,7 @@ class _MainScreenState extends State<MainScreen> {
     Color iconColor,
   ) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(16),
@@ -481,12 +485,12 @@ class _MainScreenState extends State<MainScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, size: 32, color: iconColor),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(
             title,
             style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             value,
             style: TextStyle(
@@ -509,7 +513,7 @@ class _MainScreenState extends State<MainScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(16),
@@ -517,7 +521,7 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           children: [
             Icon(icon, size: 32, color: color),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               title,
               style: TextStyle(fontWeight: FontWeight.w600, color: color),
@@ -545,30 +549,30 @@ class _MainScreenState extends State<MainScreen> {
     }
 
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Row(
         children: [
           CircleAvatar(
             backgroundColor: statusColor.withOpacity(0.1),
             child: Icon(Icons.payment, color: statusColor),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   payment.name,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   'Due: ${payment.dueDate.day}/${payment.dueDate.month}/${payment.dueDate.year}',
                   style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
                     color: statusColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
@@ -590,16 +594,16 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               Text(
                 '₹${payment.amount.toStringAsFixed(0)}',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               if (showActions) ...[
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
                       onPressed: () => _markAsPaid(payment),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.check_circle,
                         color: Colors.green,
                         size: 20,
@@ -607,7 +611,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     IconButton(
                       onPressed: () => _deletePayment(payment),
-                      icon: Icon(Icons.delete, color: Colors.red, size: 20),
+                      icon: const Icon(Icons.delete, color: Colors.red, size: 20),
                     ),
                   ],
                 ),
@@ -625,20 +629,20 @@ class _MainScreenState extends State<MainScreen> {
       title: Text(title),
       trailing: hasSwitch
           ? Switch(value: true, onChanged: (v) {})
-          : Icon(Icons.arrow_forward_ios, size: 16),
+          : const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: () {
         if (title == 'About PayTrack') {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text('About PayTrack'),
-              content: Text(
+              title: const Text('About PayTrack'),
+              content: const Text(
                 'PayTrack v1.0.0\nYour personal payment reminder app\n\nFeatures:\n• Track payment due dates\n• Dashboard overview\n• Calendar view\n• Payment categories',
               ),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             ),
@@ -653,7 +657,7 @@ class _MainScreenState extends State<MainScreen> {
       children: [
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.blue,
@@ -670,30 +674,30 @@ class _MainScreenState extends State<MainScreen> {
   void _showAddPaymentDialog() {
     String name = '';
     double amount = 0;
-    DateTime dueDate = DateTime.now().add(Duration(days: 30));
+    DateTime dueDate = DateTime.now().add(const Duration(days: 30));
     String category = 'Bills';
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Add New Payment'),
+        title: const Text('Add New Payment'),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                decoration: InputDecoration(labelText: 'Payment Name'),
+                decoration: const InputDecoration(labelText: 'Payment Name'),
                 onChanged: (value) => name = value,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextField(
-                decoration: InputDecoration(labelText: 'Amount (₹)'),
+                decoration: const InputDecoration(labelText: 'Amount (₹)'),
                 keyboardType: TextInputType.number,
                 onChanged: (value) => amount = double.tryParse(value) ?? 0,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextField(
-                decoration: InputDecoration(labelText: 'Category'),
+                decoration: const InputDecoration(labelText: 'Category'),
                 onChanged: (value) => category = value,
               ),
             ],
@@ -702,7 +706,7 @@ class _MainScreenState extends State<MainScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -712,11 +716,11 @@ class _MainScreenState extends State<MainScreen> {
                 });
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Payment added successfully!')),
+                  const SnackBar(content: Text('Payment added successfully!')),
                 );
               }
             },
-            child: Text('Add'),
+            child: const Text('Add'),
           ),
         ],
       ),

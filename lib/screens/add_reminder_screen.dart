@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddReminderScreen extends StatefulWidget {
-  const AddReminderScreen({Key? key}) : super(key: key);
+  const AddReminderScreen({super.key});
 
   @override
   State<AddReminderScreen> createState() => _AddReminderScreenState();

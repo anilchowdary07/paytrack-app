@@ -12,7 +12,7 @@ void main() {
     expect(find.text('Your Smart Finance Companion'), findsOneWidget);
 
     // Wait for the timer to complete and pump to next screen
-    await tester.pump(Duration(seconds: 3));
+    await tester.pump(const Duration(seconds: 3));
 
     // Should now be on login screen
     expect(find.text('Welcome Back!'), findsOneWidget);

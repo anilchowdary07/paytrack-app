@@ -5,6 +5,8 @@ void main() {
 }
 
 class PayTrackApp extends StatelessWidget {
+  const PayTrackApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,6 +18,8 @@ class PayTrackApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -34,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PayTrack'),
+        title: const Text('PayTrack'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
@@ -43,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         onTap: (index) => setState(() => _selectedIndex = index),
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.dashboard),
             label: 'Dashboard',
@@ -64,16 +68,18 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Dashboard', style: Theme.of(context).textTheme.headlineMedium),
-          SizedBox(height: 20),
-          Card(
+          const SizedBox(height: 20),
+          const Card(
             child: Padding(
               padding: EdgeInsets.all(16),
               child: Column(
@@ -95,8 +101,8 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 16),
-          Card(
+          const SizedBox(height: 16),
+          const Card(
             child: Padding(
               padding: EdgeInsets.all(16),
               child: Column(
@@ -118,11 +124,13 @@ class DashboardScreen extends StatelessWidget {
 }
 
 class RemindersScreen extends StatelessWidget {
+  const RemindersScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -130,10 +138,10 @@ class RemindersScreen extends StatelessWidget {
               'Payment Reminders',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: ListView(
-                children: [
+                children: const [
                   ListTile(
                     leading: Icon(Icons.payment, color: Colors.orange),
                     title: Text('Electricity Bill'),
@@ -162,27 +170,29 @@ class RemindersScreen extends StatelessWidget {
         onPressed: () {
           // Add new reminder
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
 }
 
 class CalendarScreen extends StatelessWidget {
+  const CalendarScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.calendar_today, size: 64, color: Colors.grey),
-          SizedBox(height: 16),
+          const Icon(Icons.calendar_today, size: 64, color: Colors.grey),
+          const SizedBox(height: 16),
           Text(
             'Calendar View',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          SizedBox(height: 8),
-          Text(
+          const SizedBox(height: 8),
+          const Text(
             'Payment schedule will be displayed here',
             style: TextStyle(color: Colors.grey),
           ),
@@ -193,31 +203,33 @@ class CalendarScreen extends StatelessWidget {
 }
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          CircleAvatar(radius: 50, child: Icon(Icons.person, size: 50)),
-          SizedBox(height: 16),
+          const CircleAvatar(radius: 50, child: Icon(Icons.person, size: 50)),
+          const SizedBox(height: 16),
           Text('John Doe', style: Theme.of(context).textTheme.headlineMedium),
-          SizedBox(height: 8),
-          Text('john.doe@example.com', style: TextStyle(color: Colors.grey)),
-          SizedBox(height: 32),
+          const SizedBox(height: 8),
+          const Text('john.doe@example.com', style: TextStyle(color: Colors.grey)),
+          const SizedBox(height: 32),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            leading: const Icon(Icons.settings),
+            title: const Text('Settings'),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.notifications),
-            title: Text('Notification Settings'),
+            leading: const Icon(Icons.notifications),
+            title: const Text('Notification Settings'),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.info),
-            title: Text('About'),
+            leading: const Icon(Icons.info),
+            title: const Text('About'),
             onTap: () {},
           ),
         ],

@@ -84,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen>
                             width: 2,
                           ),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.payment,
                           size: 80,
                           color: Colors.white,

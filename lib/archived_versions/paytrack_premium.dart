@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() => runApp(PayTrackPremiumApp());
 
 class PayTrackPremiumApp extends StatelessWidget {
+  const PayTrackPremiumApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,6 +23,8 @@ class PayTrackPremiumApp extends StatelessWidget {
 
 // Welcome Screen
 class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -33,7 +37,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   _checkLoginStatus() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
@@ -62,19 +66,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.account_balance_wallet,
                   size: 80,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 30),
-              Text(
+              const SizedBox(height: 30),
+              const Text(
                 'PayTrack Premium',
                 style: TextStyle(
                   fontSize: 32,
@@ -82,7 +86,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Your Smart Finance Companion',
                 style: TextStyle(
@@ -90,8 +94,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   color: Colors.white.withOpacity(0.8),
                 ),
               ),
-              SizedBox(height: 50),
-              CircularProgressIndicator(color: Colors.white),
+              const SizedBox(height: 50),
+              const CircularProgressIndicator(color: Colors.white),
             ],
           ),
         ),
@@ -102,6 +106,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
 // Login Screen
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -133,23 +139,23 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         child: SafeArea(
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             child: Column(
               children: [
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.blue.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.account_balance_wallet,
                     size: 60,
                     color: Colors.blue,
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Text(
                   _isLogin ? 'Welcome Back!' : 'Create Account',
                   style: TextStyle(
@@ -158,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.grey.shade800,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   _isLogin
                       ? 'Sign in to continue'
@@ -168,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.grey.shade600,
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
 
                 // Email Field
                 Container(
@@ -179,13 +185,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.1),
                         blurRadius: 10,
-                        offset: Offset(0, 5),
+                        offset: const Offset(0, 5),
                       ),
                     ],
                   ),
                   child: TextField(
                     controller: _emailController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email, color: Colors.blue),
                       hintText: 'Email Address',
                       border: InputBorder.none,
@@ -193,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Password Field
                 Container(
@@ -204,14 +210,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.1),
                         blurRadius: 10,
-                        offset: Offset(0, 5),
+                        offset: const Offset(0, 5),
                       ),
                     ],
                   ),
                   child: TextField(
                     controller: _passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.lock, color: Colors.blue),
                       hintText: 'Password',
                       border: InputBorder.none,
@@ -219,10 +225,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
 
                 // Login Button
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 55,
                   child: ElevatedButton(
@@ -236,7 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: Text(
                       _isLogin ? 'Sign In' : 'Create Account',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -244,7 +250,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Toggle Login/Register
                 TextButton(
@@ -253,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     _isLogin
                         ? "Don't have an account? Sign Up"
                         : "Already have an account? Sign In",
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
+                    style: const TextStyle(color: Colors.blue, fontSize: 16),
                   ),
                 ),
               ],
@@ -267,13 +273,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
 // Main Screen with Navigation
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -291,24 +299,24 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30), topRight: Radius.circular(30)),
           boxShadow: [
             BoxShadow(
                 color: Colors.grey.withOpacity(0.3),
                 blurRadius: 20,
-                offset: Offset(0, -5)),
+                offset: const Offset(0, -5)),
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30), topRight: Radius.circular(30)),
           child: BottomNavigationBar(
             currentIndex: _currentIndex,
             onTap: (index) {
               setState(() => _currentIndex = index);
               _pageController.animateToPage(index,
-                  duration: Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut);
             },
             type: BottomNavigationBarType.fixed,
@@ -316,7 +324,7 @@ class _MainScreenState extends State<MainScreen> {
             unselectedItemColor: Colors.grey,
             backgroundColor: Colors.white,
             elevation: 0,
-            items: [
+            items: const [
               BottomNavigationBarItem(
                   icon: Icon(Icons.dashboard), label: 'Dashboard'),
               BottomNavigationBarItem(
@@ -337,6 +345,8 @@ class _MainScreenState extends State<MainScreen> {
 
 // Dashboard Screen
 class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
@@ -361,7 +371,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: [
             Text('Good Morning!',
                 style: TextStyle(fontSize: 16, color: Colors.grey.shade600)),
-            Text('Welcome to PayTrack',
+            const Text('Welcome to PayTrack',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -371,18 +381,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications_outlined, color: Colors.black),
+            icon: const Icon(Icons.notifications_outlined, color: Colors.black),
           ),
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Monthly Spending Card
             Container(
-              padding: EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.blue.shade600, Colors.blue.shade800],
@@ -394,7 +404,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   BoxShadow(
                       color: Colors.blue.withOpacity(0.3),
                       blurRadius: 20,
-                      offset: Offset(0, 10)),
+                      offset: const Offset(0, 10)),
                 ],
               ),
               child: Column(
@@ -407,20 +417,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           style: TextStyle(
                               color: Colors.white.withOpacity(0.8),
                               fontSize: 16)),
-                      Icon(Icons.trending_up, color: Colors.white),
+                      const Icon(Icons.trending_up, color: Colors.white),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text('₹${monthlySpent.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 32,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text('of ₹${monthlyLimit.toStringAsFixed(0)} limit',
                       style: TextStyle(
                           color: Colors.white.withOpacity(0.8), fontSize: 14)),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   LinearProgressIndicator(
                     value: spentPercentage,
                     backgroundColor: Colors.white.withOpacity(0.3),
@@ -428,7 +438,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       spentPercentage > 0.8 ? Colors.red : Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     '${(spentPercentage * 100).toStringAsFixed(1)}% of budget used',
                     style: TextStyle(
@@ -437,7 +447,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Summary Cards
             Row(
@@ -451,7 +461,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Colors.orange,
                   ),
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Expanded(
                   child: _buildSummaryCard(
                     'Upcoming',
@@ -463,33 +473,33 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Quick Actions
-            Text('Quick Actions',
+            const Text('Quick Actions',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Row(
               children: [
                 Expanded(
                     child: _buildActionCard(
                         'Add Payment', Icons.add, Colors.blue, () {})),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Expanded(
                     child: _buildActionCard(
                         'Set Limit', Icons.savings, Colors.purple, () {})),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Expanded(
                     child: _buildActionCard(
                         'View Reports', Icons.bar_chart, Colors.teal, () {})),
               ],
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Recent Activity
-            Text('Recent Activity',
+            const Text('Recent Activity',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             _buildActivityItem('Electricity Bill', '₹89.50', 'Due Tomorrow',
                 Icons.bolt, Colors.yellow),
             _buildActivityItem('Internet Bill', '₹45.00', 'Due Today',
@@ -505,7 +515,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildSummaryCard(String title, String value, IconData icon,
       Color bgColor, Color iconColor) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(15),
@@ -514,10 +524,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, color: iconColor, size: 30),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Text(title,
               style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(value,
               style: TextStyle(
                   fontSize: 20, fontWeight: FontWeight.bold, color: iconColor)),
@@ -531,7 +541,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(15),
@@ -539,7 +549,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           children: [
             Icon(icon, color: color, size: 25),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(title,
                 style: TextStyle(
                     fontSize: 11, fontWeight: FontWeight.w600, color: color),
@@ -553,8 +563,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildActivityItem(String title, String amount, String subtitle,
       IconData icon, Color color) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.all(15),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -562,25 +572,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
           BoxShadow(
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 10,
-              offset: Offset(0, 5))
+              offset: const Offset(0, 5))
         ],
       ),
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icon, color: color, size: 20),
           ),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: TextStyle(fontWeight: FontWeight.w600)),
+                Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
                 Text(subtitle,
                     style:
                         TextStyle(color: Colors.grey.shade600, fontSize: 12)),
@@ -588,7 +598,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
           ),
           Text(amount,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
         ],
       ),
     );
@@ -597,6 +607,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
 // Payment Reminders Screen
 class PaymentRemindersScreen extends StatefulWidget {
+  const PaymentRemindersScreen({super.key});
+
   @override
   _PaymentRemindersScreenState createState() => _PaymentRemindersScreenState();
 }
@@ -604,12 +616,12 @@ class PaymentRemindersScreen extends StatefulWidget {
 class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
   List<PaymentReminder> reminders = [
     PaymentReminder('Electricity Bill', 89.50,
-        DateTime.now().add(Duration(days: 1)), 'Utilities'),
+        DateTime.now().add(const Duration(days: 1)), 'Utilities'),
     PaymentReminder('Internet Bill', 45.00, DateTime.now(), 'Internet'),
-    PaymentReminder('Water Bill', 32.75, DateTime.now().add(Duration(days: 7)),
+    PaymentReminder('Water Bill', 32.75, DateTime.now().add(const Duration(days: 7)),
         'Utilities'),
     PaymentReminder(
-        'Phone Bill', 25.00, DateTime.now().add(Duration(days: 3)), 'Phone'),
+        'Phone Bill', 25.00, DateTime.now().add(const Duration(days: 3)), 'Phone'),
   ];
 
   @override
@@ -619,17 +631,17 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Payment Reminders',
+        title: const Text('Payment Reminders',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
             onPressed: _addReminder,
-            icon: Icon(Icons.add, color: Colors.blue),
+            icon: const Icon(Icons.add, color: Colors.blue),
           ),
         ],
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         itemCount: reminders.length,
         itemBuilder: (context, index) {
           final reminder = reminders[index];
@@ -656,8 +668,8 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
     }
 
     return Container(
-      margin: EdgeInsets.only(bottom: 15),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -665,7 +677,7 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
           BoxShadow(
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 15,
-              offset: Offset(0, 5))
+              offset: const Offset(0, 5))
         ],
       ),
       child: Column(
@@ -679,9 +691,9 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(reminder.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(reminder.category,
                         style: TextStyle(
                             color: Colors.grey.shade600, fontSize: 14)),
@@ -689,10 +701,10 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                 ),
               ),
               Text('₹${reminder.amount.toStringAsFixed(0)}',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ],
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -704,11 +716,11 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                           TextStyle(color: Colors.grey.shade600, fontSize: 12)),
                   Text(
                       '${reminder.dueDate.day}/${reminder.dueDate.month}/${reminder.dueDate.year}',
-                      style: TextStyle(fontWeight: FontWeight.w600)),
+                      style: const TextStyle(fontWeight: FontWeight.w600)),
                 ],
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: statusColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
@@ -721,7 +733,7 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
               ),
             ],
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Row(
             children: [
               Expanded(
@@ -732,11 +744,11 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                   ),
-                  child: Text('Mark as Paid',
+                  child: const Text('Mark as Paid',
                       style: TextStyle(color: Colors.white)),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               ElevatedButton(
                 onPressed: () => _editReminder(index),
                 style: ElevatedButton.styleFrom(
@@ -744,7 +756,7 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ),
-                child: Icon(Icons.edit, color: Colors.white),
+                child: const Icon(Icons.edit, color: Colors.white),
               ),
             ],
           ),
@@ -785,13 +797,15 @@ class _PaymentRemindersScreenState extends State<PaymentRemindersScreen> {
       reminders.removeAt(index);
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Payment marked as paid!')),
+      const SnackBar(content: Text('Payment marked as paid!')),
     );
   }
 }
 
 // Spending Tracking Screen
 class SpendingTrackingScreen extends StatefulWidget {
+  const SpendingTrackingScreen({super.key});
+
   @override
   _SpendingTrackingScreenState createState() => _SpendingTrackingScreenState();
 }
@@ -815,23 +829,23 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Spending Tracking',
+        title: const Text('Spending Tracking',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
             onPressed: _setDailyLimit,
-            icon: Icon(Icons.settings, color: Colors.blue),
+            icon: const Icon(Icons.settings, color: Colors.blue),
           ),
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Daily Spending Card
             Container(
-              padding: EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.purple.shade600, Colors.purple.shade800],
@@ -843,7 +857,7 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                   BoxShadow(
                       color: Colors.purple.withOpacity(0.3),
                       blurRadius: 20,
-                      offset: Offset(0, 10))
+                      offset: const Offset(0, 10))
                 ],
               ),
               child: Column(
@@ -856,20 +870,20 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                           style: TextStyle(
                               color: Colors.white.withOpacity(0.8),
                               fontSize: 16)),
-                      Icon(Icons.today, color: Colors.white),
+                      const Icon(Icons.today, color: Colors.white),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text('₹${todaySpent.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 32,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text('of ₹${dailyLimit.toStringAsFixed(0)} daily limit',
                       style: TextStyle(
                           color: Colors.white.withOpacity(0.8), fontSize: 14)),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   LinearProgressIndicator(
                     value: spentPercentage,
                     backgroundColor: Colors.white.withOpacity(0.3),
@@ -877,7 +891,7 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                       spentPercentage > 0.8 ? Colors.red : Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     '₹${(dailyLimit - todaySpent).toStringAsFixed(2)} remaining',
                     style: TextStyle(
@@ -886,20 +900,20 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Add Expense Button
-            Container(
+            SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: _addExpense,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.add, color: Colors.white),
@@ -913,16 +927,16 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Today's Expenses
-            Text('Today\'s Expenses',
+            const Text('Today\'s Expenses',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: todaySpending.length,
               itemBuilder: (context, index) {
                 final expense = todaySpending[index];
@@ -958,8 +972,8 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
     }
 
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.all(15),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -967,26 +981,26 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
           BoxShadow(
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 10,
-              offset: Offset(0, 5))
+              offset: const Offset(0, 5))
         ],
       ),
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: categoryColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(categoryIcon, color: categoryColor, size: 20),
           ),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(expense.name,
-                    style: TextStyle(fontWeight: FontWeight.w600)),
+                    style: const TextStyle(fontWeight: FontWeight.w600)),
                 Text(expense.category,
                     style:
                         TextStyle(color: Colors.grey.shade600, fontSize: 12)),
@@ -997,10 +1011,10 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text('₹${expense.amount.toStringAsFixed(2)}',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
               IconButton(
                 onPressed: () => _deleteExpense(index),
-                icon: Icon(Icons.delete, color: Colors.red, size: 18),
+                icon: const Icon(Icons.delete, color: Colors.red, size: 18),
               ),
             ],
           ),
@@ -1029,24 +1043,24 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
       builder: (context) {
         double newLimit = dailyLimit;
         return AlertDialog(
-          title: Text('Set Daily Limit'),
+          title: const Text('Set Daily Limit'),
           content: TextField(
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Daily Limit (₹)'),
+            decoration: const InputDecoration(labelText: 'Daily Limit (₹)'),
             onChanged: (value) =>
                 newLimit = double.tryParse(value) ?? dailyLimit,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () {
                 setState(() => dailyLimit = newLimit);
                 Navigator.pop(context);
               },
-              child: Text('Set'),
+              child: const Text('Set'),
             ),
           ],
         );
@@ -1064,6 +1078,8 @@ class _SpendingTrackingScreenState extends State<SpendingTrackingScreen> {
 
 // Analytics Screen
 class AnalyticsScreen extends StatelessWidget {
+  const AnalyticsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1071,17 +1087,17 @@ class AnalyticsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Analytics',
+        title: const Text('Analytics',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Monthly Overview
             Container(
-              padding: EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.teal.shade600, Colors.teal.shade800],
@@ -1093,7 +1109,7 @@ class AnalyticsScreen extends StatelessWidget {
                   BoxShadow(
                       color: Colors.teal.withOpacity(0.3),
                       blurRadius: 20,
-                      offset: Offset(0, 10))
+                      offset: const Offset(0, 10))
                 ],
               ),
               child: Column(
@@ -1102,40 +1118,40 @@ class AnalyticsScreen extends StatelessWidget {
                   Text('Monthly Overview',
                       style: TextStyle(
                           color: Colors.white.withOpacity(0.8), fontSize: 16)),
-                  SizedBox(height: 10),
-                  Text('₹1,250.75',
+                  const SizedBox(height: 10),
+                  const Text('₹1,250.75',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 32,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text('Total spent this month',
                       style: TextStyle(
                           color: Colors.white.withOpacity(0.8), fontSize: 14)),
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Category Breakdown
-            Text('Spending by Category',
+            const Text('Spending by Category',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             _buildCategoryItem('Food & Dining', 450.25, 0.36, Colors.orange),
             _buildCategoryItem('Transport', 320.50, 0.26, Colors.blue),
             _buildCategoryItem('Shopping', 280.00, 0.22, Colors.green),
             _buildCategoryItem('Utilities', 200.00, 0.16, Colors.purple),
 
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Spending Trends
-            Text('Spending Trends',
+            const Text('Spending Trends',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
@@ -1143,17 +1159,17 @@ class AnalyticsScreen extends StatelessWidget {
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
                       blurRadius: 15,
-                      offset: Offset(0, 5))
+                      offset: const Offset(0, 5))
                 ],
               ),
               child: Column(
                 children: [
                   _buildTrendItem('This Week', '₹345.50', '+12%', Colors.red),
-                  Divider(),
+                  const Divider(),
                   _buildTrendItem('Last Week', '₹308.25', '-5%', Colors.green),
-                  Divider(),
+                  const Divider(),
                   _buildTrendItem('This Month', '₹1,250.75', '+8%', Colors.red),
-                  Divider(),
+                  const Divider(),
                   _buildTrendItem(
                       'Last Month', '₹1,156.40', '-15%', Colors.green),
                 ],
@@ -1168,8 +1184,8 @@ class AnalyticsScreen extends StatelessWidget {
   Widget _buildCategoryItem(
       String category, double amount, double percentage, Color color) {
     return Container(
-      margin: EdgeInsets.only(bottom: 15),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -1177,7 +1193,7 @@ class AnalyticsScreen extends StatelessWidget {
           BoxShadow(
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 10,
-              offset: Offset(0, 5))
+              offset: const Offset(0, 5))
         ],
       ),
       child: Column(
@@ -1185,18 +1201,18 @@ class AnalyticsScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(category, style: TextStyle(fontWeight: FontWeight.w600)),
+              Text(category, style: const TextStyle(fontWeight: FontWeight.w600)),
               Text('₹${amount.toStringAsFixed(2)}',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           LinearProgressIndicator(
             value: percentage,
             backgroundColor: Colors.grey.shade200,
             valueColor: AlwaysStoppedAnimation<Color>(color),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1217,13 +1233,13 @@ class AnalyticsScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(period, style: TextStyle(fontWeight: FontWeight.w600)),
+        Text(period, style: const TextStyle(fontWeight: FontWeight.w600)),
         Row(
           children: [
-            Text(amount, style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(width: 10),
+            Text(amount, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(width: 10),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: changeColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
@@ -1243,6 +1259,8 @@ class AnalyticsScreen extends StatelessWidget {
 
 // Profile Screen
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1250,16 +1268,16 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Profile',
+        title: const Text('Profile',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             // Profile Header
             Container(
-              padding: EdgeInsets.all(30),
+              padding: const EdgeInsets.all(30),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
@@ -1267,24 +1285,24 @@ class ProfileScreen extends StatelessWidget {
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
                       blurRadius: 15,
-                      offset: Offset(0, 5))
+                      offset: const Offset(0, 5))
                 ],
               ),
               child: Column(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 50,
                     backgroundColor: Colors.blue,
                     child: Icon(Icons.person, size: 50, color: Colors.white),
                   ),
-                  SizedBox(height: 20),
-                  Text('John Doe',
+                  const SizedBox(height: 20),
+                  const Text('John Doe',
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                   Text('john.doe@example.com',
                       style:
                           TextStyle(color: Colors.grey.shade600, fontSize: 16)),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -1292,13 +1310,13 @@ class ProfileScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                     ),
-                    child: Text('Edit Profile',
+                    child: const Text('Edit Profile',
                         style: TextStyle(color: Colors.white)),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Settings Options
             Container(
@@ -1309,22 +1327,22 @@ class ProfileScreen extends StatelessWidget {
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
                       blurRadius: 15,
-                      offset: Offset(0, 5))
+                      offset: const Offset(0, 5))
                 ],
               ),
               child: Column(
                 children: [
                   _buildSettingItem(
                       Icons.notifications, 'Notifications', () {}),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   _buildSettingItem(Icons.security, 'Security', () {}),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   _buildSettingItem(Icons.help, 'Help & Support', () {}),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   _buildSettingItem(Icons.info, 'About', () {
                     // Show about dialog
                   }),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   _buildSettingItem(Icons.logout, 'Logout', () async {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
@@ -1334,26 +1352,26 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // App Info
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.blue.shade50,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
                 children: [
-                  Text('PayTrack Premium',
+                  const Text('PayTrack Premium',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue)),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text('Version 1.0.0',
                       style: TextStyle(color: Colors.grey.shade600)),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Text('Thank you for using PayTrack Premium!',
                       style: TextStyle(color: Colors.grey.shade600),
                       textAlign: TextAlign.center),
@@ -1406,7 +1424,7 @@ class AddReminderDialog extends StatefulWidget {
   final PaymentReminder? reminder;
   final Function(PaymentReminder) onAdd;
 
-  AddReminderDialog({this.reminder, required this.onAdd});
+  const AddReminderDialog({super.key, this.reminder, required this.onAdd});
 
   @override
   _AddReminderDialogState createState() => _AddReminderDialogState();
@@ -1416,7 +1434,7 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
   final _nameController = TextEditingController();
   final _amountController = TextEditingController();
   String _selectedCategory = 'Bills';
-  DateTime _selectedDate = DateTime.now().add(Duration(days: 30));
+  DateTime _selectedDate = DateTime.now().add(const Duration(days: 30));
 
   @override
   void initState() {
@@ -1441,18 +1459,18 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Payment Name'),
+              decoration: const InputDecoration(labelText: 'Payment Name'),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             TextField(
               controller: _amountController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Amount (₹)'),
+              decoration: const InputDecoration(labelText: 'Amount (₹)'),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             DropdownButtonFormField<String>(
               value: _selectedCategory,
-              decoration: InputDecoration(labelText: 'Category'),
+              decoration: const InputDecoration(labelText: 'Category'),
               items: [
                 'Bills',
                 'Utilities',
@@ -1466,17 +1484,17 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
                   .toList(),
               onChanged: (value) => setState(() => _selectedCategory = value!),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Row(
               children: [
-                Text('Due Date: '),
+                const Text('Due Date: '),
                 TextButton(
                   onPressed: () async {
                     final date = await showDatePicker(
                       context: context,
                       initialDate: _selectedDate,
                       firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(Duration(days: 365)),
+                      lastDate: DateTime.now().add(const Duration(days: 365)),
                     );
                     if (date != null) {
                       setState(() => _selectedDate = date);
@@ -1493,7 +1511,7 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         ElevatedButton(
           onPressed: () {
@@ -1519,7 +1537,7 @@ class _AddReminderDialogState extends State<AddReminderDialog> {
 class AddExpenseDialog extends StatefulWidget {
   final Function(SpendingEntry) onAdd;
 
-  AddExpenseDialog({required this.onAdd});
+  const AddExpenseDialog({super.key, required this.onAdd});
 
   @override
   _AddExpenseDialogState createState() => _AddExpenseDialogState();
@@ -1533,24 +1551,24 @@ class _AddExpenseDialogState extends State<AddExpenseDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Add Expense'),
+      title: const Text('Add Expense'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             controller: _nameController,
-            decoration: InputDecoration(labelText: 'Expense Name'),
+            decoration: const InputDecoration(labelText: 'Expense Name'),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           TextField(
             controller: _amountController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Amount (₹)'),
+            decoration: const InputDecoration(labelText: 'Amount (₹)'),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           DropdownButtonFormField<String>(
             value: _selectedCategory,
-            decoration: InputDecoration(labelText: 'Category'),
+            decoration: const InputDecoration(labelText: 'Category'),
             items: ['Food', 'Transport', 'Shopping', 'Entertainment', 'Other']
                 .map((category) =>
                     DropdownMenuItem(value: category, child: Text(category)))
@@ -1562,7 +1580,7 @@ class _AddExpenseDialogState extends State<AddExpenseDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         ElevatedButton(
           onPressed: () {
@@ -1578,7 +1596,7 @@ class _AddExpenseDialogState extends State<AddExpenseDialog> {
               Navigator.pop(context);
             }
           },
-          child: Text('Add'),
+          child: const Text('Add'),
         ),
       ],
     );
