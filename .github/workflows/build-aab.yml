@@ -1,0 +1,78 @@
+name: Build AAB (Android App Bundle)
+
+on:
+  push:
+    branches: [ simple-build ]
+  workflow_dispatch:
+
+jobs:
+  build-aab:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+        
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.0'
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Build Android App Bundle (AAB)
+      run: flutter build appbundle --release
+      
+    - name: Upload AAB artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: paytrack-premium-aab
+        path: build/app/outputs/bundle/release/app-release.aab
+        
+    - name: Create Release with AAB
+      if: github.ref == 'refs/heads/simple-build'
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: aab-v1.0.${{ github.run_number }}
+        name: PayTrack Premium AAB v1.0.${{ github.run_number }}
+        body: |
+          🚀 **PayTrack Premium - Android App Bundle (AAB)**
+          
+          **✅ Better than APK:**
+          - Smaller download size (optimized for your device)
+          - Google Play Store ready
+          - Dynamic delivery support
+          - Better performance
+          
+          **📱 Features:**
+          - 💰 Payment Reminders & Tracking
+          - 📊 Spending Analytics & Charts
+          - 🗓️ Calendar Integration
+          - 📈 Financial Insights
+          - 🔔 Smart Notifications
+          - 📱 Modern Material UI
+          
+          **📦 Installation:**
+          1. Download the .aab file
+          2. Use bundletool to convert to APK if needed
+          3. Or upload directly to Google Play Store
+          
+          **Build Info:**
+          - Commit: ${{ github.sha }}
+          - Build: ${{ github.run_number }}
+          - Flutter: 3.24.0
+          - Target SDK: 34
+        files: |
+          build/app/outputs/bundle/release/app-release.aab
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
