@@ -5,6 +5,9 @@ on:
   push:
     branches: [ simple-build ]
 
+permissions:
+  contents: write
+
 jobs:
   build-simple-apk:
     runs-on: ubuntu-latest
